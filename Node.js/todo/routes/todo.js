@@ -2,10 +2,11 @@
 const express = require("express");
 const app = express();
 const router = express.Router(); // express의 라우터 기능
-
+const bodyParser = require("body-parser");
 const controller = require("../controllers/todo");
 
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // Main
 router.get('/', controller.get); // router.get(req, res)
