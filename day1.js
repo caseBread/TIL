@@ -1,13 +1,13 @@
-// 체크포인트
+// 핵심 변수
+// size : 노페어=0,페어=1,트리플=2,스트레이트=3,포카드=4
+// high : 페어의 숫자(스트레이트일 경우 가장높은숫자)를 배열로 저장
 
-// 기본 틀 생성
-// 페어 확인함수 작성
-// 연속규칙 확인함수 작성
-// 비교함수 작성
+
+// 입출력 부분
 let ok = false;
 let array1 = [];
 let array2 = [];
-var reader = require('readline').createInterface({
+const reader = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
 });
@@ -20,7 +20,6 @@ reader.on('line', (line) => {
         array2 = line.split(' ').map((el) => parseInt(el));
         reader.close();
     }
-    
 });
 reader.on('close', () => {
     console.log(main(array1,array2));
@@ -28,28 +27,20 @@ reader.on('close', () => {
 });
 
 
-// 배열 정렬
 
 
-
-function checkCont(array, size, high) {
+function check_straight(array, size, high) {
     if (size == 3) return [ 4, high ];
-    let cnt = 0; // 연속수 count
+    let cnt = 0; 
     for (let i = 1; i < array.length; i++) {
         if (array[i-1] == array[i]) continue;
         cnt = (array[i-1] + 1 == array[i]) ? cnt+1 : 0;
-        if (4 <= cnt) {
-            size = 3;
-            high = [i];
-        }
+        if (4 <= cnt) [ size, high ] = [ 3, [array[i]] ];
     }
     return [ size, high ];
 }
 
-// size : 노페어=0,페어=1,트리플=2,스트레이트=3,포카드=4
-// high = 페어의 숫자(스트레이트일 경우 가장높은숫자)를 배열로 저장
-
-function checkSize(array, size, size_temp, high,i) {
+function check_pair(array, size, size_temp, high,i) {
     if (size == size_temp) {
         high.push(array[i]);
     }
@@ -65,13 +56,13 @@ function check(array) {
     for (let i = 1; i < array.length; i++) {
         if (array[i-1] == array[i]) size_temp++;
         else size_temp = 0;
-        [ size, high ] = checkSize(array, size, size_temp, high,i);
+        [ size, high ] = check_pair(array, size, size_temp, high,i);
     }
-    [ size, high ] = checkCont(array, size, high);
+    [ size, high ] = check_straight(array, size, high);
     return [ size, high ];
 }
 
-function sizeSame(high1,high2) {
+function compare_sizeSame(high1,high2) {
     high1.sort((a,b) => b-a);
     high2.sort((a,b) => b-a);
     for (let i = 0; i < high1.length; i++) {
@@ -82,10 +73,14 @@ function sizeSame(high1,high2) {
 }
 
 function compare(size1, high1, size2, high2) {
-    if (size1 == 0 && size2 == 0) return 0;
-    if (size1 > size2) return 1;
-    else if (size1 < size2) return 2;
-    else return sizeSame(high1,high2);
+    if (size1 == 0 && size2 == 0) 
+        return 0;
+    else if (size1 > size2) 
+        return 1;
+    else if (size1 < size2) 
+        return 2;
+    else
+        return compare_sizeSame(high1,high2);
 }
 
 function main(array1,array2) {
