@@ -1,17 +1,35 @@
-// 두 배열 크기 : 7, 원소크기 : 1~13의 정수, 같은숫자는 최대 4개
-const array1 = [1, 5, 7, 2, 9, 13, 10]
-const array2 = [2, 3, 9, 10, 4, 8, 11]
-// 배열 정렬
-array1.sort((a,b)=>a-b);
-array2.sort((a,b)=>a-b);
-
-
 // 체크포인트
 
 // 기본 틀 생성
 // 페어 확인함수 작성
 // 연속규칙 확인함수 작성
 // 비교함수 작성
+let ok = false;
+let array1 = [];
+let array2 = [];
+var reader = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+reader.on('line', (line) => {
+    if (!ok) {
+        array1 = line.split(' ').map((el) => parseInt(el));
+        ok = true
+    }
+    else {
+        array2 = line.split(' ').map((el) => parseInt(el));
+        reader.close();
+    }
+    
+});
+reader.on('close', () => {
+    console.log(main(array1,array2));
+    process.exit();
+});
+
+
+// 배열 정렬
+
 
 
 function checkCont(array, size, high) {
@@ -67,13 +85,14 @@ function compare(size1, high1, size2, high2) {
     if (size1 == 0 && size2 == 0) return 0;
     if (size1 > size2) return 1;
     else if (size1 < size2) return 2;
-    else return sizeSame();
+    else return sizeSame(high1,high2);
 }
 
-function main() {
+function main(array1,array2) {
+    array1.sort((a,b)=>a-b);
+    array2.sort((a,b)=>a-b);
     const [array1_size, array1_high] = check(array1);
     const [array2_size, array2_high] = check(array2);
     return compare(array1_size, array1_high, array2_size, array2_high);
 }
 
-main();
