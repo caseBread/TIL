@@ -15,7 +15,16 @@ array2.sort()
 
 
 function checkCont(size, high) {
-    
+    if (size == 3) return [ 4, high ];
+    let cnt = 0; // 연속수 count
+    for (let i = 1; i < array.length; i++) {
+        cnt = (array[i-1] + 1 == array[i]) ? cnt+1 : 0;
+        if (4 <= cnt) {
+            size = 3;
+            high = [i];
+        }
+    }
+    return [ size, high ];
 }
 
 // size : 노페어=0,페어=1,트리플=2,스트레이트=3,포카드=4
