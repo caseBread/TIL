@@ -19,4 +19,4 @@
 
 
 # 실행결과
-![screenshot](./day1%20%EC%B6%9C%EB%A0%A5%EA%B2%B0%EA%B3%BC.jpg) 
+![image](https://user-images.githubusercontent.com/92029332/179486453-d5fdfcd8-33ee-4e09-9398-f46667f5ac6a.png)
