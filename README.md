@@ -2,13 +2,10 @@
 - [x] VirtualBox 설치
 - [x] Linux 설치
 - [x] ssh를 설치하고 계정추가 및 패스워드 설정
-- [x] ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
-- [ ] 본인 계정에서 /monitoring 디렉토리를 생성하고 764 모드로 접근 권한을 바꿔서, 본인 계정으로 쓸 수 있도록 설정한다.
-- [ ] 가상 환경에서 터미널을 열고 /monitoring 경로에 대해 권한을 확인하는 화면을 캡처한다.
-- [ ] 가상 환경에 오늘 날짜 + 서울 시간대로 지정해서 로컬과 가상 환경이 동일하도록 맞춘다.
-- [ ] 가상 환경에서 터미널을 열고 date 명령으로 오늘 날짜를 출력한 상태로, 화면을 캡처한다.
-- [ ] 가상 환경에 node.js 를 설치하고 버전을 확인한다.
-- [ ] 어제 작성한 day1 미션 js파일을 복사해서 실행한다.
+- [x] ssh 서버 실행 후 로컬 컴퓨터에서 ssh 서버 접속
+- [x] /monitoring 디렉토리를 생성, 764로 권한 변경, 가상환경에서 권한 확인
+- [ ] 가상 환경을 로컬 컴퓨터와 시간 동일하게 설정
+- [ ] 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
 
 # 학습 메모
 
@@ -57,7 +54,7 @@ sudo adduser [생성할 ID]
 ```
 본인은 id를 boost 로 설정하였다.
 
-- ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
+- ssh 서버 실행 후 로컬 컴퓨터에서 ssh 서버 접속
 
 1. ssh 서버를 실행한다.
 ```
@@ -98,3 +95,24 @@ VirtualBox에서 포드 포워딩을 설정해주면 된다.
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjAy/MDAxNjU4MjEwNTY3NDk4.3aBGBKOM3aQmkIt7ToX8jR6q45Kn2lCn_keqKgjqtCUg.TrS08nCU_pQQgLWAAP_Hz9mYIvYh5GUvXdYYj58vkcwg.PNG.kgu0515/image.png?type=w773)
 이런 창이 뜨게 되고, ssh 계정으로 로그인해주면 ssh 서버에 접속할 수 있게 된다.
 
+- /monitoring 디렉토리를 생성, 764로 권한 변경, 가상환경에서 권한 확인
+
+1. 로컬 컴퓨터에서 실행한 ssh 서버에 다음 명령어를 입력한다.
+
+```
+mkdir monitoring // monitoring 폴더 생성
+chmod 764 monitoring // monitoring 권한을 764로 변경
+```
+
+2. 가상 환경으로 돌아가서 로컬과 동일한 계정으로 접속
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTgg/MDAxNjU4MjExMzAxMzg2.921LvJhmGW0C7HGZHeD90WF4hXqyXb07Jym_amYAVm8g.pSHYwOpVJKhBrW67k2JS0R0CoV9ZSE7mhoBNaPrnC_Eg.PNG.kgu0515/image.png?type=w773)
+
+3. monitoring 폴더에 대해 권한 확인
+
+monitoring 폴더가 있는 폴더로 이동 후
+```
+ls -l 
+```
+명령어를 입력해주면
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTQ5/MDAxNjU4MjExMjY0NzM0.54W_U8UMQ2g-eNAMixqzkl1a-QZ747_XTdHG4SrbSuYg.9ynkUx9_2Nvj2_r_sGV083AtiZfy0d-ZylNk8ar83Bog.PNG.kgu0515/image.png?type=w773)
+다음과 같은 화면이 뜬다.
