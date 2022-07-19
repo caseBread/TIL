@@ -4,7 +4,7 @@
 - [x] ssh를 설치하고 계정추가 및 패스워드 설정
 - [x] ssh 서버 실행 후 로컬 컴퓨터에서 ssh 서버 접속
 - [x] /monitoring 디렉토리를 생성, 764로 권한 변경, 가상환경에서 권한 확인
-- [ ] 가상 환경을 로컬 컴퓨터와 시간 동일하게 설정
+- [x] 가상 환경을 로컬 컴퓨터와 시간 동일하게 설정
 - [ ] 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
 
 # 학습 메모
@@ -116,3 +116,11 @@ ls -l
 명령어를 입력해주면
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTQ5/MDAxNjU4MjExMjY0NzM0.54W_U8UMQ2g-eNAMixqzkl1a-QZ747_XTdHG4SrbSuYg.9ynkUx9_2Nvj2_r_sGV083AtiZfy0d-ZylNk8ar83Bog.PNG.kgu0515/image.png?type=w773)
 다음과 같은 화면이 뜬다.
+
+- 가상 환경을 로컬 컴퓨터와 시간 동일하게 설정
+</br></br>
+이부분은 이미 리눅스 설치 과정에서 한국시간대로 설정해주었기 때문에 따로 시간을 변경해줄 필요가 없었다.
+
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjI2/MDAxNjU4MjEyNTI2NjU5.Gx5f3bAVXOK3dJA0sI1q4CPgw02ZKALF3F-2u8m4PaAg.zKcNUYUsfgDEpJveippAA2MvWQ6H78eyel_IoJ1xHrgg.PNG.kgu0515/image.png?type=w773)
+캡처 완료
+
