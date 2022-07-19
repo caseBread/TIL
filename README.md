@@ -2,7 +2,7 @@
 - [x] VirtualBox 설치
 - [x] Linux 설치
 - [x] ssh를 설치하고 계정추가 및 패스워드 설정
-- [ ] ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
+- [x] ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
 - [ ] 본인 계정에서 /monitoring 디렉토리를 생성하고 764 모드로 접근 권한을 바꿔서, 본인 계정으로 쓸 수 있도록 설정한다.
 - [ ] 가상 환경에서 터미널을 열고 /monitoring 경로에 대해 권한을 확인하는 화면을 캡처한다.
 - [ ] 가상 환경에 오늘 날짜 + 서울 시간대로 지정해서 로컬과 가상 환경이 동일하도록 맞춘다.
@@ -57,4 +57,44 @@ sudo adduser [생성할 ID]
 ```
 본인은 id를 boost 로 설정하였다.
 
+- ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
+
+1. ssh 서버를 실행한다.
+```
+sudo service ssh start // 실행
+sudo service ssh stop // 종료
+sudo service ssh status // 서버 동작 확인
+```
+
+2. 서버 동작을 확인한다.
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTYx/MDAxNjU4MjA5NDk4NTg0.F9nuPW2vnam6s2WtQ3qT-V8-m5jHXLeeY5IgcSQv3xcg.HelNXamHGUKpIUn5jiGt61DfGQBlX2lB_Q1s9MzKSCIg.PNG.kgu0515/image.png?type=w773)
+
+active (running) 이 보인다면 서버가 잘 동작이 된다는 것이다.
+
+3. [PuTTY](https://www.putty.org/) 설치하기</br>
+PuTTY를 이용하면 로컬 컴퓨터에서 ssh 서버로 접속이 가능하다.
+
+3-1. PuTTY에 ssh 정보를 입력한다.
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTk1/MDAxNjU4MjA5NjU0ODY3.djBYtxXLTIwUFFgVqXkGW_udMZHZI0-Twm5ivhKCxpYg.Mk_AvzPP76ijMK2Cx6paIdqX75DxWgbFYbO_C_AXaY4g.PNG.kgu0515/image.png?type=w773)
+위의 창에서 ssh 서버의 IP address와 Port를 입력해주어야 한다.
+
+3-2. ssh 정보 알아내기
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfODAg/MDAxNjU4MjEwNDE4NTY1.9xihB3j0wIp5tgu7VC5P8ID4RrErYsx25DcGzn21YiAg.neX4u3fkAJYnzz-uMFVcqsfGaPIDrKQE3VWZsE7yQgIg.PNG.kgu0515/image.png?type=w773)
+ubuntu의 터미널에서 
+```
+ip addreess
+```
+명령어를 입력해주면 ip 주소를 알아낼 수 있다.
+위의 이미지에서 빨간 동그라미 부분이 서버 주소이다.
+이 주소만으로는 연결이 되지 않는다.
+VirtualBox에서 포드 포워딩을 설정해주면 된다.
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfOTQg/MDAxNjU4MjEwNDcwNjc2.jao0A8EP9cp8eETtXxAjDxg2dYICFMlIsARBBFKBrDMg.q_cLlVONySvAXoShzJOfcLi6YmOUJuy48vdH2e3yRH4g.PNG.kgu0515/image.png?type=w773)
+위 이미지와 같이 설정해주면 호스트IP(127.0.0.1)과 호스트 포트(1234)를 통해 ssh 서버에 접속이 가능하다.
+
+3-3. 로컬 컴퓨터에서 ssh 서버 접속하기
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMiAg/MDAxNjU4MjEwNTI0NTA1.eyC35YWtAaNkM5IW4sYWDQWcs7i-KCQbc92EtmypRCog.89Onyau9hQ4a0FgmwZEq596m3QaN6BKBc3YTCbeb4Bsg.PNG.kgu0515/image.png?type=w773)
+다시 PuTTY로 돌아와 위의 값을 입력해주면
+
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjAy/MDAxNjU4MjEwNTY3NDk4.3aBGBKOM3aQmkIt7ToX8jR6q45Kn2lCn_keqKgjqtCUg.TrS08nCU_pQQgLWAAP_Hz9mYIvYh5GUvXdYYj58vkcwg.PNG.kgu0515/image.png?type=w773)
+이런 창이 뜨게 되고, ssh 계정으로 로그인해주면 ssh 서버에 접속할 수 있게 된다.
 
