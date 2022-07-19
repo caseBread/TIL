@@ -305,4 +305,4 @@ CPU 칸을 보면 사용율이 99.7%인 것을 확인할 수 있다.
 
 [crontab 사용법](https://cloud-oky.tistory.com/320)
 
-[[unix] 쉘 스크립트에서 부동 소수점 숫자와 비교하는 방법](https://klero.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-stress-%ED%88%B4%EC%9D%84-%ED%86%B5%ED%95%B4-CPU-Memory-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%EB%B6%80%ED%95%98-%EC%A3%BC%EB%8A%94-%EB%B0%A9%EB%B2%95)
+[리눅스 stress 툴을 통해 CPU, Memory 스트레스 부하 주는 방법](https://klero.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-stress-%ED%88%B4%EC%9D%84-%ED%86%B5%ED%95%B4-CPU-Memory-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%EB%B6%80%ED%95%98-%EC%A3%BC%EB%8A%94-%EB%B0%A9%EB%B2%95)
