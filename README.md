@@ -287,3 +287,22 @@ top 명령어로 CPU 과부하가 걸렸는 지를 확인해 보았다.
 ![](https://postfiles.pstatic.net/MjAyMjA3MjBfMzQg/MDAxNjU4MjQ2NDk4OTYw.6PJqCpt7V8lhnL1fhSqdl51jbcdnRHl7AYvq_v36P10g.4HlgFemXyuMT5MIFg1_pvH9i4e9Rzw6QsYxMnC6M2lEg.PNG.kgu0515/image.png?type=w773)
 
 CPU 칸을 보면 사용율이 99.7%인 것을 확인할 수 있다.
+
+
+## 참고자료
+
+[Shell Script 문법 정리](https://blog.d0ngd0nge.xyz/shell-script/)
+
+[[ubuntu] SSH로 원격접속 하기](https://velog.io/@717lumos/Ubuntu-SSH%EB%A1%9C-%EC%9B%90%EA%B2%A9%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0)
+
+[리눅스 - 우분투 VM ssh 서버, 로컬 PC에서 접속하기](https://jihyewoo.tistory.com/74)
+
+[우분투 Node.js 설치및 npm 환경구축](https://velog.io/@ywoosang/Node.js-%EC%84%A4%EC%B9%98)
+
+[How to get overall CPU usage (e.g. 57%) on Linux](https://stackoverflow.com/questions/9229333/how-to-get-overall-cpu-usage-e-g-57-on-linux)
+
+[[unix] 쉘 스크립트에서 부동 소수점 숫자와 비교하는 방법](http://daplus.net/unix-%EC%89%98-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%90%EC%84%9C-%EB%B6%80%EB%8F%99-%EC%86%8C%EC%88%98%EC%A0%90-%EC%88%AB%EC%9E%90%EC%99%80-%EB%B9%84%EA%B5%90%ED%95%98%EB%8A%94-%EB%B0%A9/)
+
+[crontab 사용법](https://cloud-oky.tistory.com/320)
+
+[[unix] 쉘 스크립트에서 부동 소수점 숫자와 비교하는 방법](https://klero.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-stress-%ED%88%B4%EC%9D%84-%ED%86%B5%ED%95%B4-CPU-Memory-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%EB%B6%80%ED%95%98-%EC%A3%BC%EB%8A%94-%EB%B0%A9%EB%B2%95)
