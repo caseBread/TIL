@@ -13,7 +13,7 @@
 - [x] CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
 - [x] crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
 - [x] 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
-- [ ] CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
+- [x] CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
 
 
 # 학습 메모
@@ -240,6 +240,22 @@ touch monitoring/`date +%Y%m%d`-`%H%M%S`
 date 기능을 이용하여 구현하였다.
 
 
+## 최종 구현 스크립트 코드
+![](https://postfiles.pstatic.net/MjAyMjA3MjBfMjQw/MDAxNjU4MjQ0OTgyNjg2.ssRHve9ODJ9ttaer3HDUg7c9Zso-_MwHNONy36QztfUg.SvHqgH5_paeKZV7jVWH7h4laOQmHqAoIsgCJi_DT3uAg.PNG.kgu0515/image.png?type=w773)
+
+- CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
 
 
+stress 명령어를 활용하면 가능하다.
 
+```
+grep -c process /proc/cpuinfo // 사용가능한 CPU 수
+stress -c <사용할 CPU 수> // cpu 부하 명령어
+```
+
+stress 명령어를 실행 후
+top 명령어로 CPU 과부하가 걸렸는 지를 확인해 보았다.
+
+![](https://postfiles.pstatic.net/MjAyMjA3MjBfMzQg/MDAxNjU4MjQ2NDk4OTYw.6PJqCpt7V8lhnL1fhSqdl51jbcdnRHl7AYvq_v36P10g.4HlgFemXyuMT5MIFg1_pvH9i4e9Rzw6QsYxMnC6M2lEg.PNG.kgu0515/image.png?type=w773)
+
+CPU 칸을 보면 사용율이 99.7%인 것을 확인할 수 있다.
