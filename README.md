@@ -11,7 +11,7 @@
 
 ## 쉘 스크립트
 - [x] CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
-- [ ] crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
+- [x] crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
 - [ ] 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
 - [ ] CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
 
@@ -35,11 +35,13 @@
 - Linux 설치
 
 1. VirtualBox를 설치해준 후 실행하면 아래의 창이 뜬다.
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjIz/MDAxNjU4MjAxODUyNzQ2.vr81Dt5iozRKkl88wzFKFjEpL5pQYTT6yThur4HkTIQg.tLbalSP7eNVaZa15xAjkT0dGSMXyPhTkIgWVbwTTngEg.PNG.kgu0515/image.png?type=w773)
 
 2. [새로 만들기] 클릭을 통해 새 가상 하드디스크 설정.
 
 3. [설정] -> [저장소] -> [비어 있음] -> CD모양 클릭
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjUz/MDAxNjU4MjAyNzI4OTQ2.enxfYzx3tDsBJTp_Exl-VdYmh9KKlmiGjYNyeC8x4d8g.EstI0mskrqoqBG8VEJzIkRKNJ1FpLNo9RbZP9ShbxaYg.PNG.kgu0515/image.png?type=w773)
 
 4. [ubuntu홈페이지](https://ubuntu.com/download/desktop)에서 다운받은 iso 부팅이미지를 넣는다.
@@ -73,6 +75,7 @@ sudo service ssh status // 서버 동작 확인
 ```
 
 2. 서버 동작을 확인한다.
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTYx/MDAxNjU4MjA5NDk4NTg0.F9nuPW2vnam6s2WtQ3qT-V8-m5jHXLeeY5IgcSQv3xcg.HelNXamHGUKpIUn5jiGt61DfGQBlX2lB_Q1s9MzKSCIg.PNG.kgu0515/image.png?type=w773)
 
 active (running) 이 보인다면 서버가 잘 동작이 된다는 것이다.
@@ -81,10 +84,12 @@ active (running) 이 보인다면 서버가 잘 동작이 된다는 것이다.
 PuTTY를 이용하면 로컬 컴퓨터에서 ssh 서버로 접속이 가능하다.
 
 3-1. PuTTY에 ssh 정보를 입력한다.
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTk1/MDAxNjU4MjA5NjU0ODY3.djBYtxXLTIwUFFgVqXkGW_udMZHZI0-Twm5ivhKCxpYg.Mk_AvzPP76ijMK2Cx6paIdqX75DxWgbFYbO_C_AXaY4g.PNG.kgu0515/image.png?type=w773)
 위의 창에서 ssh 서버의 IP address와 Port를 입력해주어야 한다.
 
 3-2. ssh 정보 알아내기
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfODAg/MDAxNjU4MjEwNDE4NTY1.9xihB3j0wIp5tgu7VC5P8ID4RrErYsx25DcGzn21YiAg.neX4u3fkAJYnzz-uMFVcqsfGaPIDrKQE3VWZsE7yQgIg.PNG.kgu0515/image.png?type=w773)
 ubuntu의 터미널에서 
 ```
@@ -94,6 +99,7 @@ ip addreess
 위의 이미지에서 빨간 동그라미 부분이 서버 주소이다.
 이 주소만으로는 연결이 되지 않는다.
 VirtualBox에서 포드 포워딩을 설정해주면 된다.
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfOTQg/MDAxNjU4MjEwNDcwNjc2.jao0A8EP9cp8eETtXxAjDxg2dYICFMlIsARBBFKBrDMg.q_cLlVONySvAXoShzJOfcLi6YmOUJuy48vdH2e3yRH4g.PNG.kgu0515/image.png?type=w773)
 위 이미지와 같이 설정해주면 호스트IP(127.0.0.1)과 호스트 포트(1234)를 통해 ssh 서버에 접속이 가능하다.
 
@@ -114,6 +120,7 @@ chmod 764 monitoring // monitoring 권한을 764로 변경
 ```
 
 2. 가상 환경으로 돌아가서 로컬과 동일한 계정으로 접속
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTgg/MDAxNjU4MjExMzAxMzg2.921LvJhmGW0C7HGZHeD90WF4hXqyXb07Jym_amYAVm8g.pSHYwOpVJKhBrW67k2JS0R0CoV9ZSE7mhoBNaPrnC_Eg.PNG.kgu0515/image.png?type=w773)
 
 3. monitoring 폴더에 대해 권한 확인
@@ -123,6 +130,7 @@ monitoring 폴더가 있는 폴더로 이동 후
 ls -l 
 ```
 명령어를 입력해주면
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTQ5/MDAxNjU4MjExMjY0NzM0.54W_U8UMQ2g-eNAMixqzkl1a-QZ747_XTdHG4SrbSuYg.9ynkUx9_2Nvj2_r_sGV083AtiZfy0d-ZylNk8ar83Bog.PNG.kgu0515/image.png?type=w773)
 다음과 같은 화면이 뜬다.
 
@@ -145,15 +153,19 @@ $ sudo apt install npm
 위의 4가지 명령어를 통해 node.js와 npm 설치를 할 수가 있다.
 
 2. node.js 버전 확인해보기
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfNjUg/MDAxNjU4MjEyODc4NjI2.j1UyL13fk0Y_DAM06BCmgZKDmHUYPLudH5Iqp7Tid1Qg.B22JQFZjy63mpWpGd8jD-qBXqHjA-dnHKnHymQ8Xkfgg.PNG.kgu0515/image.png?type=w773)
 
 3. 가상 환경의 웹 브라우저로 day1 미션을 진행했던 학습 저장소 접속
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjIz/MDAxNjU4MjEzNzU1MDg5.c5uE86HkVtuadeiFmqJ6vYIOsn3CP8xny0aWRFXRFx0g.F0ATRY2S0rr2FNvZ0CxYU7xEpQf2aVyn8Ql_kDn3y8wg.PNG.kgu0515/image.png?type=w773)
 
 4. 코드 복사 후 가상 환경 속 js파일 생성 후 붙혀넣기
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTc1/MDAxNjU4MjEzNzk1OTYw.i9Oihtyx4dg2IZDAtOQq7nuyYLLhPlSnwUeDAGadrHgg.YHKNtnkqMD6YTGUhspruetyWP_OfNaDJXbYFwN0MvU4g.PNG.kgu0515/image.png?type=w773)
 
 5. 가상 환경의 터미널 통해 js파일 실행
+
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTcy/MDAxNjU4MjEzODExMTU5.S7GbAbAbWUb1TZd520psqNhxRmCOCSA7-kqzvzZh0dYg.wAqpfrXG-PXU1qPHoff1foyoGjG2qO5_jgYQF_P37UMg.PNG.kgu0515/image.png?type=w773)
 
 - CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
@@ -186,4 +198,39 @@ awk 명령어를 활용하면 각각의 cpu 사용량을 추출할 수 있게 �
 ```
 export $usage
 ```
+
+- crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
+
+1. 스크립트파일 실행예약
+
+이번 미션에서 crontab에 대해 알아야할 명령어는 다음과 같다. 
+```
+crontab -e // crontab 수정 
+crontab -l // crontab 열람
+service cron start // crontab 갱신 및 시작
+service corn status // crontab 동작 확인
+```
+
+먼저 crontab -e를 통해 스크립트파일 실행 예약 명령어를 입력해야 한다. 다음과 같이 crontab 에 입력해주면 된다.
+```
+* * * * * b.sh
+```
+
+앞의 5개의 별은 각각 분(0-59), 시간(0-23), 일(1-31), 월(1-12), 요일(0-7)을 뜻한다. *은 default 값으로, 매 분or시간or일or월or요일을 뜻한다.
+즉, 위의 코드는 매 분마다 b.sh를 실행한다는 뜻이 된다.
+
+b.sh 는 실행할 스크립트 파일이다.
+
+2. 자동화 알람 기능 스크립트 코드 작성
+
+CPU 사용률이 70% 이상이 3번 반복될 경우 알람기능이 실행되게끔 코드를 작성하였다.
+CPU 사용률이 70%가 넘었을 경우를 counting해주기 위해 아래 이미지 처럼 해당 디렉토리에 cnt파일을 생성하여 counting을 기록해주었다.
+
+![](https://postfiles.pstatic.net/MjAyMjA3MjBfMTIx/MDAxNjU4MjQ0NTAxNzI5.BJIMCjEAUiilPNXVlJJE5Tgt3WqykTuPudeF5TeNs9og.vjQuqaoQRod6kTCToOxr5BgKqiENo4VXGtsS0tad894g.PNG.kgu0515/image.png?type=w773)
+
+
+알람기능은 slack 챗봇을 활용하였다.
+
+
+
 
