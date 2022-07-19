@@ -12,7 +12,7 @@
 ## 쉘 스크립트
 - [x] CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
 - [x] crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
-- [ ] 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
+- [x] 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
 - [ ] CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
 
 
@@ -230,6 +230,15 @@ CPU 사용률이 70%가 넘었을 경우를 counting해주기 위해 아래 이�
 
 
 알람기능은 slack 챗봇을 활용하였다.
+
+- 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
+
+```
+touch monitoring/`date +%Y%m%d`-`%H%M%S`
+```
+
+date 기능을 이용하여 구현하였다.
+
 
 
 
