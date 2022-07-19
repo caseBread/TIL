@@ -5,7 +5,7 @@
 - [x] ssh 서버 실행 후 로컬 컴퓨터에서 ssh 서버 접속
 - [x] /monitoring 디렉토리를 생성, 764로 권한 변경, 가상환경에서 권한 확인
 - [x] 가상 환경을 로컬 컴퓨터와 시간 동일하게 설정
-- [ ] 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
+- [x] 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
 
 # 학습 메모
 
@@ -123,4 +123,27 @@ ls -l
 
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjI2/MDAxNjU4MjEyNTI2NjU5.Gx5f3bAVXOK3dJA0sI1q4CPgw02ZKALF3F-2u8m4PaAg.zKcNUYUsfgDEpJveippAA2MvWQ6H78eyel_IoJ1xHrgg.PNG.kgu0515/image.png?type=w773)
 캡처 완료
+
+- 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
+
+1. 가상환경에 node.js 설치
+```
+$ sudo apt-get install -y curl
+$ sudo apt update
+$ sudo apt install nodejs
+$ sudo apt install npm
+```
+위의 4가지 명령어를 통해 node.js와 npm 설치를 할 수가 있다.
+
+2. node.js 버전 확인해보기
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfNjUg/MDAxNjU4MjEyODc4NjI2.j1UyL13fk0Y_DAM06BCmgZKDmHUYPLudH5Iqp7Tid1Qg.B22JQFZjy63mpWpGd8jD-qBXqHjA-dnHKnHymQ8Xkfgg.PNG.kgu0515/image.png?type=w773)
+
+3. 가상 환경의 웹 브라우저로 day1 미션을 진행했던 학습 저장소 접속
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjIz/MDAxNjU4MjEzNzU1MDg5.c5uE86HkVtuadeiFmqJ6vYIOsn3CP8xny0aWRFXRFx0g.F0ATRY2S0rr2FNvZ0CxYU7xEpQf2aVyn8Ql_kDn3y8wg.PNG.kgu0515/image.png?type=w773)
+
+4. 코드 복사 후 가상 환경 속 js파일 생성 후 붙혀넣기
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTc1/MDAxNjU4MjEzNzk1OTYw.i9Oihtyx4dg2IZDAtOQq7nuyYLLhPlSnwUeDAGadrHgg.YHKNtnkqMD6YTGUhspruetyWP_OfNaDJXbYFwN0MvU4g.PNG.kgu0515/image.png?type=w773)
+
+5. 가상 환경의 터미널 통해 js파일 실행
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTcy/MDAxNjU4MjEzODExMTU5.S7GbAbAbWUb1TZd520psqNhxRmCOCSA7-kqzvzZh0dYg.wAqpfrXG-PXU1qPHoff1foyoGjG2qO5_jgYQF_P37UMg.PNG.kgu0515/image.png?type=w773)
 
