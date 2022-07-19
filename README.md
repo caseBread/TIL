@@ -10,8 +10,8 @@
 - [x] 가상 환경에 node.js 를 설치 후 day1 미션 파일 실행
 
 ## 쉘 스크립트
-- [ ] CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
-- [ ] crontab 동작 방식을 확인하고 아래 조건을 설정한다.
+- [x] CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
+- [ ] crontab을 이용한 자동화 알람 기능을 스크립트로 만든다.
 - [ ] 알림을 보낼 때 마다 /monitoring 폴더에 YYYYMMDD-HHMMSS 형식으로 빈파일을 생성한다.
 - [ ] CPU 사용률을 강제로 70% 이상 높이는 방법을 찾아서 확인한다.
 
@@ -155,4 +155,35 @@ $ sudo apt install npm
 
 5. 가상 환경의 터미널 통해 js파일 실행
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTcy/MDAxNjU4MjEzODExMTU5.S7GbAbAbWUb1TZd520psqNhxRmCOCSA7-kqzvzZh0dYg.wAqpfrXG-PXU1qPHoff1foyoGjG2qO5_jgYQF_P37UMg.PNG.kgu0515/image.png?type=w773)
+
+- CPU 사용률을 cat 명령으로 가져와서 user 모드 사용률을 계산한 후 환경 변수에 저장하는 스크립트를 만든다.
+
+1. 먼저 가상 환경에 sh파일을 생성해준다.
+```
+touch [파일이름].sh
+```
+
+2. cat 명령어를 활용하여 user모드 사용률을 계산한다.
+
+```
+usage = $(cat /proc/stat | head -1 | awk '{print $2*100/($1+$2+$3+$4+$5+$6+$7+$8+$9)}')
+```
+
+cat과 head 명령어를 통해 CPU 내용을 불러오고 awk 명령어를 통해 CPU의 내용을 분할하여 user모드의 cpu만 추출을 가능하게 해준다.
+
+![](https://postfiles.pstatic.net/MjAyMjA3MTlfMTIx/MDAxNjU4MjQxOTE4NDY0.p0J-_emN4w9LV3m9e1liAfldu5qd4CgPm3BmRq_hHTYg.EP1d8uKBwhaetVOr0MXVFlhoPZOzFdDhPRTDfty685wg.PNG.kgu0515/image.png?type=w773)
+
+user모드의 cpu는 위의 이미지에서 2번째에 해당하는 값(7512)이다. </br>
+
+awk 명령어를 활용하면 각각의 cpu 사용량을 추출할 수 있게 된다. (순서에 따라 각각 $1, $2, ... 로 추출됨.)
+
+따라서, user 모드의 사용량($2)을 전체 cpu 사용량($1,$2,$3,...,$8,$9)으로 나누어주면 user모드의 cpu 사용률을 구할 수 있게 된다.
+
+
+3. 환경변수에 cpu 사용률을 저장한다.
+
+앞에서 구한 사용률을 export 명령어를 사용하여 환경변수에 추가해주면 끝이다. 사용한 명령어는 다음과 같다.
+```
+export $usage
+```
 
