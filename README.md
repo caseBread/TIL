@@ -1,10 +1,8 @@
 # 체크리스트
 - [x] VirtualBox 설치
 - [x] Linux 설치
-- [ ] 가상환경에 원격으로 접속할 수 있도록 ssh 설정
-- [ ] root 이외에 본인이 접속할 계정 추가
-- [ ] 본인 계정에 대한 패스워드 설정
-- [ ] 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
+- [x] ssh를 설치하고 계정추가 및 패스워드 설정
+- [ ] ssh 서버 실행 후 로컬 컴퓨터에서 가상 환경 리모트 컴퓨터에 ssh로 접속해서 본인 계정으로 로그인한다.
 - [ ] 본인 계정에서 /monitoring 디렉토리를 생성하고 764 모드로 접근 권한을 바꿔서, 본인 계정으로 쓸 수 있도록 설정한다.
 - [ ] 가상 환경에서 터미널을 열고 /monitoring 경로에 대해 권한을 확인하는 화면을 캡처한다.
 - [ ] 가상 환경에 오늘 날짜 + 서울 시간대로 지정해서 로컬과 가상 환경이 동일하도록 맞춘다.
@@ -44,3 +42,19 @@
 
 ![](https://postfiles.pstatic.net/MjAyMjA3MTlfMjA5/MDAxNjU4MjA3NzE5NzA5.B-haNl38TsD07k_uu1od22_76Qn74GY6A-KUbr-SHekg.z1670SpMUaJz2I7jNSw8mLDTZQZdrNZ5RgWRKlhFu8og.PNG.kgu0515/image.png?type=w773)
 설치 끝!
+
+- ssh를 설치하고 계정추가 및 패스워드 설정
+
+1. 먼저 ubuntu에서 터미널을 킨다.
+
+2. ssh를 설치한다.
+```
+sudo apt-get install openssh-server
+```
+3. ssh 계정 생성 및 비밀번호를 설정한다.
+```
+sudo adduser [생성할 ID]
+```
+본인은 id를 boost 로 설정하였다.
+
+
