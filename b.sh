@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage=$(cat /proc/stat | head -1 | awk '{print $2*100/($1+$2+$3+$4+$5+$6+$7+$8+$9)}')
-export $usage
+export usage=$usage
 s=`cat cnt`
 cntt=$((${s: (-1)}+1))
 
