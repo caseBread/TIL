@@ -16,7 +16,7 @@ const rank = {
 }; Object.freeze(rank);
 
 class Piece {
-    constructor(x,y,color) {
+    constructor(y,x,color) {
         this.position = new Position(x,y);
         this.color = color;
         
@@ -34,6 +34,7 @@ class Piece {
         }
         return result;
     }
+
 }
 
 export { Piece }

@@ -16,5 +16,6 @@
     "url": "https://gist.github.com/03b2641beaa1c7cba09c3e868c267127"
   },
   "homepage": "https://gist.github.com/03b2641beaa1c7cba09c3e868c267127",
-  "type": "module"
+  "type": "module",
+  "console": "externalTerminal"
 }

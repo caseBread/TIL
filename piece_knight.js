@@ -21,6 +21,7 @@ class Knight extends Piece {
         }
         return false;
     }
+    
 } 
 
 export { Knight }
