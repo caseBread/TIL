@@ -1,4 +1,4 @@
-import { Position } from "./position";
+import { Position } from "./position.js";
 
 const file = {
     1:"A",2:"B",3:"C",4:"D",5:"E",6:"F",7:"G",8:"H",
@@ -16,13 +16,23 @@ const rank = {
 }; Object.freeze(rank);
 
 class Piece {
-    constructor(color) {
+    constructor(x,y,color) {
         this.position = new Position(x,y);
         this.color = color;
+        
     }
-
+    // 부모 class에서 자식 method를 가져올 수 있을까  있다 !!!!!!!!
     possiblePositions() {
-        // 현재 Position을 기준으로 이동할 수 있는 모든 위치 리턴
+        const result = []
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                temp = new Position(i,j);
+                if (this.canMove(temp)) {
+                    result.push[temp];
+                }
+            }
+        }
+        return result;
     }
 }
 
