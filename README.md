@@ -6,12 +6,12 @@
 - [x] possiblePositions 구현
 - [x] bishop class 구현
 - [x] knight class 구현
-- [ ] pawn class 구현
+- [x] pawn class 구현
 - [x] queen class 구현
 - [x] rook class 구현
 - [x] position class 구현
 - [x] 프로그램 구조 모듈화
-- [ ] 테스트 시나리오 설계
+- [x] pawn 변신 구현
 
 # 학습 메모 
 

@@ -1,3 +1,4 @@
+import { file, rank } from "./file_rank.js";
 import { Bishop } from "./piece_bishop.js";
 import { Knight } from "./piece_knight.js";
 import { Pawn } from "./piece_pawn.js";
@@ -101,6 +102,8 @@ class Board {
         this.initPiece(7,5,new Bishop(7,5,1));
         this.initPiece(7,6,new Knight(7,6,1));
         this.initPiece(7,7,new Rook(7,7,1));
+
+        log("체스 보드를 초기화했습니다.")
     }
 
     initPiece(y,x,type) {
@@ -111,17 +114,33 @@ class Board {
 
     }
 
-    move(fromX,fromY, toX,toY) {
-        let flag = false;
+    isMove(p) {
+        const [ pX, pY ] = [ file[p.charAt(0)]-1, p.charAt(1)-1 ];
 
+    }
+
+    move(from, to) {
+        let flag = false;
+        const [ fromX, fromY ] = [ file[from.charAt(0)]-1, rank[from.charAt(1)]-1 ];
+        const [ toX, toY ] = [ file[to.charAt(0)]-1, rank[to.charAt(1)]-1 ];
+
+        // 옮길 체스 말이 없는 경우
+        if (this.board[fromY][fromX].piece === null) {
+            log("옮길 체스 말이 없습니다.");
+            return false;
+        }
         // 옮길 수 없는 경우
-        if (board[toY][toX].Spot.color === board[fromY][fromX].spot.color) {
+        if (this.board[toY][toX].piece !== null && this.board[toY][toX].piece.color === this.board[fromY][fromX].piece.color) {
+            log("옮길 위치에 같은 색의 체스 말이 있습니다.");
             return false;
         }
 
-        if (board[toY][toX] !== null) flag = true;
-        board[toY][toX] = board[fromY][fromX];
-        board[fromY][fromX] = null;
+        if (this.board[toY][toX] !== null) flag = true;
+        this.board[toY][toX].piece = this.board[fromY][fromX].piece;
+        this.board[fromY][fromX].piece = null;
+        if (this.board[toY][toX].piece.str === "pawn" && (this.board[toY][toX].y === 7 || this.board[toY][toX].y === 1)) {
+            this.board[toY][toX].piece = new Queen(toY,toX,this.board[toY][toX].piece.color);
+        }
         if (flag) this.printScore();
 
         return true;
