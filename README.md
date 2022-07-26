@@ -5,7 +5,7 @@
     - [x] score 구현
 - [x] possiblePositions 구현
 - [x] bishop class 구현
-- [ ] knight class 구현
+- [x] knight class 구현
 - [ ] pawn class 구현
 - [ ] queen class 구현
 - [ ] rook class 구현
