@@ -7,7 +7,7 @@
 - [x] bishop class 구현
 - [x] knight class 구현
 - [ ] pawn class 구현
-- [ ] queen class 구현
+- [x] queen class 구현
 - [ ] rook class 구현
 - [x] position class 구현
 - [x] 프로그램 구조 모듈화
