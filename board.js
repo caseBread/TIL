@@ -1,4 +1,4 @@
-import { file, rank } from "./file_rank.js";
+import { file, rank, getKeyByValue} from "./file_rank.js";
 import { Bishop } from "./piece_bishop.js";
 import { Knight } from "./piece_knight.js";
 import { Pawn } from "./piece_pawn.js";
@@ -67,7 +67,7 @@ class Board {
                 }
             }
         }
-        log(blackPoint, whitePoint);
+        log("검정 점수 :",blackPoint, "하양 점수 :", whitePoint);
     }
     resetBoard() {   
         // initPiece 8*8 반복
@@ -116,7 +116,15 @@ class Board {
 
     isMove(p) {
         const [ pX, pY ] = [ file[p.charAt(0)]-1, p.charAt(1)-1 ];
-
+        if (this.board[pY][pX].piece === null) {
+            log("해당 칸에 체스 말이 없습니다.");
+            return;
+        }
+        
+        this.board[pY][pX].piece.possiblePositions().forEach((d,i) => {
+            process.stdout.write(file[d.x+1]+(d.y+1)+", ");
+        })
+        log();
     }
 
     move(from, to) {

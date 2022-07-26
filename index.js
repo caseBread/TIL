@@ -17,7 +17,7 @@ rl.on("line", (line) => {
         chess.move(line.substring(0,2),line.substring(4,6));
         chess.display();
     } else if (/\?[A-H][1-8]/.test(line)) {
-        isMove(line.substring(1,3));
+        chess.isMove(line.substring(1,3));
     } else {
         log("잘못된 명령어입니다.")
     }

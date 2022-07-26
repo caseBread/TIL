@@ -12,9 +12,9 @@ class Pawn extends Piece {
 
     canMove(to) {
         if (this.color) {
-            return this.position.y+1 === to.y // black
+            return this.position.y-1 === to.y && this.position.x === to.x // black
         } else {
-            return this.position.y-1 === to.y // white
+            return this.position.y+1 === to.y && this.position.x === to.x // white
         }
     }
 
