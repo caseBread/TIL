@@ -68,20 +68,19 @@ class Board {
         }
         log(blackPoint, whitePoint);
     }
-
     resetBoard() {   
         // initPiece 8*8 반복
-        this.initPiece(0,0,new Rook(true));
-        this.initPiece(0,1,new Knight(true));
-        this.initPiece(0,2,new Bishop(true));
+        this.initPiece(0,0,new Rook(0,0,0));
+        this.initPiece(0,1,new Knight(0,1,0));
+        this.initPiece(0,2,new Bishop(0,2,0));
         this.initPiece(0,3,null);
-        this.initPiece(0,4,new Queen(true));
-        this.initPiece(0,5,new Bishop(true));
-        this.initPiece(0,6,new Knight(true));
-        this.initPiece(0,7,new Rook(true));
+        this.initPiece(0,4,new Queen(0,4,0));
+        this.initPiece(0,5,new Bishop(0,5,0));
+        this.initPiece(0,6,new Knight(0,6,0));
+        this.initPiece(0,7,new Rook(0,7,0));
 
         for (let i = 0; i < 8; i++) {
-            this.initPiece(1,i,new Pawn(true));
+            this.initPiece(1,i,new Pawn(1,i,0));
         }
 
         for (let i = 2; i < 6; i++) {
@@ -91,20 +90,20 @@ class Board {
         }
 
         for (let i = 0; i < 8; i++) {
-            this.initPiece(6,i,new Pawn(false));
+            this.initPiece(6,i,new Pawn(6,i,1));
         }
 
-        this.initPiece(7,0,new Rook(false));
-        this.initPiece(7,1,new Knight(false));
-        this.initPiece(7,2,new Bishop(false));
+        this.initPiece(7,0,new Rook(7,0,1));
+        this.initPiece(7,1,new Knight(7,1,1));
+        this.initPiece(7,2,new Bishop(7,2,1));
         this.initPiece(7,3,null);
-        this.initPiece(7,4,new Queen(false));
-        this.initPiece(7,5,new Bishop(false));
-        this.initPiece(7,6,new Knight(false));
-        this.initPiece(7,7,new Rook(false));
+        this.initPiece(7,4,new Queen(7,4,1));
+        this.initPiece(7,5,new Bishop(7,5,1));
+        this.initPiece(7,6,new Knight(7,6,1));
+        this.initPiece(7,7,new Rook(7,7,1));
     }
 
-    initPiece(x,y,type) {
+    initPiece(y,x,type) {
         // if type == null : 빈공간
 
         // 최대개수보다 많이 생성할 경우 error throw 해야함

@@ -1,7 +1,7 @@
 # 체크리스트
-- [ ] board 구현
+- [x] board 구현
     - [x] move 구현
-    - [ ] display 구현
+    - [x] display 구현
     - [x] score 구현
 - [x] possiblePositions 구현
 - [x] bishop class 구현
