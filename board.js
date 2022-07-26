@@ -44,8 +44,8 @@ class Spot {
 
 class Board {
     constructor() {
-        this.resetBoard();
         this.board = Array.from(Array(8), () => new Array(8))
+        this.resetBoard();
     }
 
     display() {

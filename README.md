@@ -11,5 +11,7 @@
 
 # 학습 메모 
 
+상속(, super), 다형성, Object.freeze, 
+
 [js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
 [js enum](https://sewonzzang.tistory.com/28)
