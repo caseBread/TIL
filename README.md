@@ -24,4 +24,9 @@
 
 
 [js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
+
 [js enum](https://sewonzzang.tistory.com/28)
+
+[how to call child method in parent class](https://stackoverflow.com/questions/47820030/call-a-child-method-from-a-parent-class-in-es6)
+
+[정규표현식](https://velog.io/@jangws/JS-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D%ED%8A%B9%EC%88%98%EB%AC%B8%EC%9E%90-%EC%88%AB%EC%9E%90-%EB%93%B1-6766k8d6)
