@@ -10,3 +10,6 @@
 - [ ] 테스트 시나리오 설계
 
 # 학습 메모 
+
+[js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
+[js enum](https://sewonzzang.tistory.com/28)
