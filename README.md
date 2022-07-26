@@ -1,5 +1,5 @@
 # 체크리스트
-- [ ] board 구현
+- [x] board 구현
 - [ ] piece class 구현
 - [ ] bishop class 구현
 - [ ] knight class 구현

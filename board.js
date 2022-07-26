@@ -43,25 +43,30 @@ class Spot {
 }
 
 class Board {
-    constructor () {
+    constructor() {
         this.resetBoard();
-        this.board = new Array(8);
-        for (let i = 0; i < 8; i++) {
-            this.board[i] = new Array(8);
-        }
+        this.board = Array.from(Array(8), () => new Array(8))
     }
 
     display() {
         printBoard(this.board);
     }
 
-    getScore() {
+    printScore() {
         let [ blackPoint, whitePoint ] = [ 0, 0 ]
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
-                // 점수계산
+                if (this.board[i][j].piece !== null) {
+                    const point = piecePoint[this.board[i][j].piece.str]
+                    if (this.board[i][j].piece.color) {
+                        blackPoint += point;
+                    } else {
+                        whitePoint += point;
+                    }
+                }
             }
         }
+        log(blackPoint, whitePoint);
     }
 
     resetBoard() {   
@@ -86,21 +91,20 @@ class Board {
         }
 
         for (let i = 0; i < 8; i++) {
-            this.initPiece(6,i,new Pawn(true));
+            this.initPiece(6,i,new Pawn(false));
         }
 
-        this.initPiece(7,0,new Rook(true));
-        this.initPiece(7,1,new Knight(true));
-        this.initPiece(7,2,new Bishop(true));
+        this.initPiece(7,0,new Rook(false));
+        this.initPiece(7,1,new Knight(false));
+        this.initPiece(7,2,new Bishop(false));
         this.initPiece(7,3,null);
-        this.initPiece(7,4,new Queen(true));
-        this.initPiece(7,5,new Bishop(true));
-        this.initPiece(7,6,new Knight(true));
-        this.initPiece(7,7,new Rook(true));
+        this.initPiece(7,4,new Queen(false));
+        this.initPiece(7,5,new Bishop(false));
+        this.initPiece(7,6,new Knight(false));
+        this.initPiece(7,7,new Rook(false));
     }
 
     initPiece(x,y,type) {
-        // [y][x]에 말 생성
         // if type == null : 빈공간
 
         // 최대개수보다 많이 생성할 경우 error throw 해야함
@@ -108,12 +112,20 @@ class Board {
 
     }
 
-    move(from, to) {
-        //같은 색상의 말이 to 위치에 다른 말이 이미 있으면 옮길 수 없다
-        // 말을 옮길 수 있으면 true, 옮길 수 없으면 false를 리턴한다.
-        // 만약, 다른 색상의 말이 to 위치에 있는 경우는 기존에 있던 말을 제거하고 이동한다.
-        // 다른 색상의 말을 제거한 경우는 흑과 백 점수를 출력한다.
-        // return boolean
+    move(fromX,fromY, toX,toY) {
+        let flag = false;
+
+        // 옮길 수 없는 경우
+        if (board[toY][toX].Spot.color === board[fromY][fromX].spot.color) {
+            return false;
+        }
+
+        if (board[toY][toX] !== null) flag = true;
+        board[toY][toX] = board[fromY][fromX];
+        board[fromY][fromX] = null;
+        if (flag) this.printScore();
+
+        return true;
     }
 }
 
