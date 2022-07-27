@@ -21,7 +21,7 @@
 
 - [ ] 말에의해 이동이 막혔을 경우 구현 추가 필요
 - [ ] .을 통해 멤버변수 호출 대신 getter setter 이용
-
+- [ ] 각 기물의 canMove 개선
 
 [js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
 
