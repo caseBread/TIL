@@ -86,16 +86,22 @@ class CountSet {
     }
 
     complement(other) {
-        const arr = this.copySet();
-        for (const i in other.set) {
-            if (i in arr) {
-                arr[i] -= other.set[i];
-            } 
-            if (arr[i] <= 0) {
-                delete arr[i];
+        const newVal = this.key.map((x,i) => {
+            if (other.key.indexOf(x) !== -1) {
+                return this.value[i] - other.value[other.key.indexOf(x)];
             }
-        }
-        return arr;
+            else return this.value[i];
+        });
+
+        const newKey = newVal.filter((x,i) => {
+            if (0 < x) return this.key[i];
+        })
+
+        const resultVal = newVal.filter((x) => 0 < x);
+
+        return newKey.reduce((a,c,i) => {
+            return { ...a, [c]:resultVal[i] };
+        }, new Object);
     }
 
     intersect(other) {
