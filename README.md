@@ -6,4 +6,5 @@
     - [x] sum 합집합 구현
     - [x] complement 구현
     - [x] intersect 구현
+    - [x] append 구현
 # 학습메모

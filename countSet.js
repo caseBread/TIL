@@ -4,11 +4,8 @@ class CountSet {
     }
 
     append(element) {
-        if (this.set.indexOf(element) === -1) {
-            this.set.push({element:1});
-        } else {
-            this.set[element]++;
-        }
+        const arr = this.copySet();
+        return element in this.set[element] ? arr[element]++ : arr[element] = 1;
     }
 
     isError(element) {
@@ -19,6 +16,8 @@ class CountSet {
 
     remove(element) {
         this.isError(element)
+
+        if (this.set[element] === 1)
         if (--this.set[element] === 0) {
             var temp = this.set[element];
             delete this.set[element];
