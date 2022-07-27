@@ -113,7 +113,9 @@ class CountSet {
     }
 
     resultAll() {
-        return this.set;
+        return this.key.reduce((a,c,i) => {
+            return { ...a, [c]:this.value[i] };
+        }, new Object);
     }
 }
 

@@ -12,3 +12,7 @@
 # 학습메모
 
 spread, rest
+
+filter, map은 object에 안먹힘
+
+=> list로 변환
