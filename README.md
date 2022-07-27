@@ -7,4 +7,8 @@
     - [x] complement 구현
     - [x] intersect 구현
     - [x] append 구현
+    - [x] remove 구현
+
 # 학습메모
+
+spread, rest

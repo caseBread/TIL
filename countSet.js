@@ -17,11 +17,10 @@ class CountSet {
     remove(element) {
         this.isError(element)
 
-        if (this.set[element] === 1)
-        if (--this.set[element] === 0) {
-            var temp = this.set[element];
-            delete this.set[element];
-            return temp;
+        if (this.set[element] === 1) {
+            return { element, ...this.set }
+        } else {
+            return { ...this.set, element: this.set[element]-1 }
         }
     }
 
