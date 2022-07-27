@@ -22,23 +22,35 @@ class CountSet {
     }
 
     isError(element) {
-        if (!(element in this.set)) {
+        if (!this.key.includes(element)) {
             throw "해당 요소가 포함되어있지 않습니다.";
         }
     }
 
-    findElementIndex(element) {
-        return this.key.indexOf(element);
-    }
+
     remove(element) {
         this.isError(element)
+        const keyIdx = this.key.indexOf(element);
+
+        const newKey = this.key.filter((x,i) => {
+            return i !== keyIdx;
+        });
         
-
-
-        if (this.set[element] === 1) {
-            return { element, ...this.set }
+        if (this.value[keyIdx] === 1) {
+            const newVal = this.value.filter((x,i) => {
+                return i !== keyIdx;
+            })
+            return newKey.reduce((a,c,i) => {
+                return { ...a, [c]:newVal[i] };
+            }, new Object);
         } else {
-            return { ...this.set, element: this.set[element]-1 }
+            const newVal = this.value.map((x,i) => {
+                if (i !== keyIdx) return x;
+                else return x-1;
+            })
+            return this.key.reduce((a,c,i) => {
+                return { ...a, [c]:newVal[i] };
+            }, new Object);
         }
     }
 
