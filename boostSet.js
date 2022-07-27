@@ -3,44 +3,50 @@ class BoostSet {
         this.set = set;
     }
 
+
     copySet() {
         return this.set.slice();
     }
 
+    //other, this.set은 불변해야함
     sum(other) {
         let arr = this.copySet();
-        other.set.forEach((d,i) => {
-            if ((this.set.indexOf(d)) === -1) {
-                arr.push(d);
-            }
+        const thisSet = this.resultAll();
+        const result = other.set.filter(d => {
+            return thisSet.indexOf(d) === -1
         });
+
+        arr.push.apply(arr,result);
+
         arr.sort((a,b) => {
-            return a-b;
+            return a - b;
         });
+
         return arr;
     }
 
     complement(other) {
         let arr = this.copySet();
-        other.set.forEach((d,i) => {
-            if (this.set.indexOf(d) !== -1) {
-                arr.splice(i,1);
-            }
-        });
+        const thisSet = this.resultAll();
+        const result = other.set.filter(d => {
+            thisSet.indexOf(d) !== -1
+        })
+
         return arr;
     }
 
     intersect(other) {
         // 둘다 정렬이 되어있다고 가정
+        const thisSet = resultAll();
         let arr = [];
         let i = 0;
         let j = 0;
-        while (i < this.set.length && j < other.set.length) {
-            if (this.set[i] === other.set[j]) {
-                arr.push(this.set[i]);
+        while (i < thisSet.length && j < other.set.length) {
+            if (thisSet[i] === other.set[j]) {
+                arr.push(thisSet[i]);
                 i++;
                 j++;
-            } else if (this.set[i] > other.set[j]) {
+            } else if (thisSet[i] > other.set[j]) {
                 j++;
             } else {
                 i++;
