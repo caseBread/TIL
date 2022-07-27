@@ -105,13 +105,11 @@ class CountSet {
     }
 
     intersect(other) {
-        let result = {};
-        for (const i in other.set) {
-            if (i in this.set) {
-                result[i] = 1;
-            }
-        }
-        return result;
+        const newKey = this.key.filter(x => other.key.includes(x));
+        const newVal = [...Array(newKey.length)].map(x => 1);
+        return newKey.reduce((a,c,i) => {
+            return { ...a, [c]:newVal[i] };
+        }, new Object);
     }
 
     resultAll() {
