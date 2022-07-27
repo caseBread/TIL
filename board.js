@@ -4,6 +4,7 @@ import { Knight } from "./piece_knight.js";
 import { Pawn } from "./piece_pawn.js";
 import { Queen } from "./piece_queen.js";
 import { Rook } from "./piece_rook.js";
+import { Position } from "./position.js";
 import { printBoard } from "./print.js"
 
 const log = console.log;
@@ -131,7 +132,7 @@ class Board {
         let flag = false;
         const [ fromX, fromY ] = [ file[from.charAt(0)]-1, rank[from.charAt(1)]-1 ];
         const [ toX, toY ] = [ file[to.charAt(0)]-1, rank[to.charAt(1)]-1 ];
-
+        const toPosition = new Position(toX,toY);
         // 옮길 체스 말이 없는 경우
         if (this.board[fromY][fromX].piece === null) {
             log("옮길 체스 말이 없습니다.");
@@ -140,6 +141,11 @@ class Board {
         // 옮길 수 없는 경우
         if (this.board[toY][toX].piece !== null && this.board[toY][toX].piece.color === this.board[fromY][fromX].piece.color) {
             log("옮길 위치에 같은 색의 체스 말이 있습니다.");
+            return false;
+        }
+
+        if (!this.board[fromY][fromX].piece.canMove(toPosition)) {
+            log("옳바른 이동이 아닙니다.");
             return false;
         }
 
