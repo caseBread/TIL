@@ -26,18 +26,14 @@ class BoostSet {
     }
 
     complement(other) {
-        let arr = this.copySet();
         const thisSet = this.resultAll();
-        const result = other.set.filter(d => {
-            thisSet.indexOf(d) !== -1
-        })
+        return thisSet.filter(x => !other.set.includes(x));
 
-        return arr;
     }
 
     intersect(other) {
         // 둘다 정렬이 되어있다고 가정
-        const thisSet = resultAll();
+        const thisSet = this.resultAll();
         let arr = [];
         let i = 0;
         let j = 0;
