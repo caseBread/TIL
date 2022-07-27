@@ -32,23 +32,8 @@ class BoostSet {
     }
 
     intersect(other) {
-        // 둘다 정렬이 되어있다고 가정
         const thisSet = this.resultAll();
-        let arr = [];
-        let i = 0;
-        let j = 0;
-        while (i < thisSet.length && j < other.set.length) {
-            if (thisSet[i] === other.set[j]) {
-                arr.push(thisSet[i]);
-                i++;
-                j++;
-            } else if (thisSet[i] > other.set[j]) {
-                j++;
-            } else {
-                i++;
-            }
-        }
-        return arr;
+        return thisSet.filter(x => other.set.includes(x));
     }
 
     resultAll() {
