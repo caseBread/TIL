@@ -65,16 +65,24 @@ class CountSet {
     }
 
     sum(other) {
-        const arr = this.copySet();
-        const isSet = other.set.filter(x => x in this.set);
-        return arr.map(x => {
-            if (x in isSet) {
-                arr[x] += other.set[x];
-            } else {
-                arr[x] = other.set[x];
-            } 
+        const newVal = other.key.map((x,i) => {
+            const xInThisKey = this.key.indexOf(x)
+            if (xInThisKey !== -1) return this.value[xInThisKey] + other.value[i];
+            else return other.value[i];
         });
 
+        const otherNewKey = [...other.key];
+
+        this.key.forEach((x,i) => {
+            if (!other.key.includes(x)) {
+                otherNewKey.push(x);
+                newVal.push(this.value[i]);
+            }
+        })
+
+        return otherNewKey.reduce((a,c,i) => {
+            return { ...a, [c]:newVal[i] };
+        }, new Object);
     }
 
     complement(other) {
