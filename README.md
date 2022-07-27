@@ -19,8 +19,8 @@
 
 ## 리팩토링 할 점
 
-- 말에의해 이동이 막혔을 경우 구현 추가 필요
-- 최대한 객체화
+- [ ] 말에의해 이동이 막혔을 경우 구현 추가 필요
+- [ ] .을 통해 멤버변수 호출 대신 getter setter 이용
 
 
 [js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
