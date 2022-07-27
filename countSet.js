@@ -56,7 +56,8 @@ class CountSet {
 
     countFor(element) {
         this.isError(element)
-        return this.set[element];
+        const keyIdx = this.key.indexOf(element);
+        return this.value[keyIdx];
     }
 
     copySet() {
