@@ -13,9 +13,21 @@
     - [x] intersect 구현
     - [x] resultAll 구현
 
+- [x] map 구현 
+- [x] filter 구현
+- [ ] display 구현
+- [ ] 고차함수로 동작하는 메쏘드 구현
+
 - [x] 각 기능을 확인하기 위한 상위 프로그램 구현
 
+## 리팩토링할 점
+
+- [ ] display reduce사용
+- [ ] 나만의 고차함수 구현
+
 # 학습메모
+
+클로저, 람다, 
 
 spread, rest
 

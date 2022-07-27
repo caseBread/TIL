@@ -1,7 +1,44 @@
+const log = console.log;
 class CountSet {
     constructor(set = {}) {
         this.key = Object.keys(set).map((x) => Number(x));
         this.value = Object.values(set).map((x) => Number(x));
+    }
+
+    map(cc) {
+        const k = this.key;
+        const v = this.value;
+        return function() {
+            return cc(k,v);
+        }
+    }
+
+    filter(cc) {
+        const k = this.key;
+        const v = this.value;
+        return function() {
+            return cc(k,v);
+        }
+    }
+
+    display() {
+
+        const mapc = this.map((k,v) => {
+            const getMapSet = k.reduce((acc,curr,idx) => {
+                return { ...acc, [curr]: v[idx]+1 };
+            }, new Object);
+            log(getMapSet);
+            return getMapSet;
+        });
+        const filterc = this.filter((k,v) => {
+            const getFilterSet = k.reduce((acc,curr,idx) => {
+                return { ...acc, [curr]: v[idx] };
+            }, new Object);
+            log(getFilterSet);
+            return getFilterSet;
+        });
+        const mappedSet = mapc();
+        const filteredSet = filterc();
     }
 
     append(element) {

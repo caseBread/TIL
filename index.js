@@ -23,3 +23,6 @@ log("count 요소 빼기 :",CS.remove(3));
 log("count 합집합 :",CS.sum(otherCS));
 log("count 여집합 :",CS.complement(otherCS));
 log("count 교집합 :",CS.intersect(otherCS));
+
+BS.display();
+CS.display();

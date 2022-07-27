@@ -1,8 +1,38 @@
+const log = console.log;
 class BoostSet {
     constructor(set) {
         this.set = set;
     }
 
+    map(cc) {
+        const a = this.set;
+        return function() {
+            return cc(a);
+        }
+    }
+
+    filter(cc) {
+        const a = this.set;
+        return function() {
+            return cc(a);
+        }
+    }
+
+    display() {
+
+        const mapc = this.map((a) => {
+            const getMapSet = a.map((x) => x+1);
+            log(getMapSet);
+            return getMapSet;
+        });
+        const filterc = this.filter((a) => {
+            const getFilterSet = a.filter((x) => x<=2);
+            log(getFilterSet);
+            return getFilterSet;
+        });
+        const mappedSet = mapc();
+        const filteredSet = filterc();
+    }
 
     copySet() {
         return this.set.slice();
@@ -10,7 +40,7 @@ class BoostSet {
 
     //other, this.set은 불변해야함
     sum(other) {
-        let arr = this.copySet();
+        const arr = this.copySet();
         const thisSet = this.resultAll();
         const result = other.set.filter(d => {
             return thisSet.indexOf(d) === -1
