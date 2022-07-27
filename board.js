@@ -150,6 +150,7 @@ class Board {
         }
 
         if (this.board[toY][toX] !== null) flag = true;
+        this.board[fromY][fromX].piece.position = toPosition;
         this.board[toY][toX].piece = this.board[fromY][fromX].piece;
         this.board[fromY][fromX].piece = null;
         if (this.board[toY][toX].piece.str === "pawn" && (this.board[toY][toX].y === 7 || this.board[toY][toX].y === 1)) {

@@ -21,6 +21,7 @@
 
 - [ ] 말에의해 이동이 막혔을 경우 구현 추가 필요
 - [ ] .을 통해 멤버변수 호출 대신 getter setter 이용
+- [ ] 흰색, 검정색 차례 구현
 
 
 [js chess](https://www.geeksforgeeks.org/design-a-chess-game/)
