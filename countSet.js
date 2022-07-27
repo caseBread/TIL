@@ -1,11 +1,24 @@
 class CountSet {
     constructor(set = {}) {
-        this.set = set;
+        this.key = Object.keys(set).map((x) => Number(x));
+        this.value = Object.values(set).map((x) => Number(x));
     }
 
     append(element) {
-        const arr = this.copySet();
-        return element in this.set[element] ? arr[element]++ : arr[element] = 1;
+        if (this.key.indexOf(element) !== -1) {
+            const newValue = this.value.map((x,idx) => {
+                if (this.key[idx] === element) {
+                   return x+1
+                } else { return x }
+            });
+            return this.key.reduce((acc,curr,idx) => {
+                return { ...acc, [curr]: newValue[idx] };
+            }, new Object);
+        } else {
+            return [...this.key,element].reduce((acc,curr,idx) => {
+                return { ...acc, [curr]: [...this.value,1][idx]}
+            }, new Object);
+        }
     }
 
     isError(element) {
@@ -14,8 +27,13 @@ class CountSet {
         }
     }
 
+    findElementIndex(element) {
+        return this.key.indexOf(element);
+    }
     remove(element) {
         this.isError(element)
+        
+
 
         if (this.set[element] === 1) {
             return { element, ...this.set }
@@ -34,20 +52,21 @@ class CountSet {
     }
 
     sum(other) {
-        let arr = this.copySet();
-        for (var i in other.set) {
-            if (i in arr) {
-                arr[i] += other.set[i];
+        const arr = this.copySet();
+        const isSet = other.set.filter(x => x in this.set);
+        return arr.map(x => {
+            if (x in isSet) {
+                arr[x] += other.set[x];
             } else {
-                arr[i] = other.set[i];
-            }
-        }
-        return arr;
+                arr[x] = other.set[x];
+            } 
+        });
+
     }
 
     complement(other) {
-        let arr = this.copySet();
-        for (var i in other.set) {
+        const arr = this.copySet();
+        for (const i in other.set) {
             if (i in arr) {
                 arr[i] -= other.set[i];
             } 
@@ -60,7 +79,7 @@ class CountSet {
 
     intersect(other) {
         let result = {};
-        for (var i in other.set) {
+        for (const i in other.set) {
             if (i in this.set) {
                 result[i] = 1;
             }
