@@ -3,6 +3,7 @@ const log = console.log;
 function Path(str) {
     this.str = str;
     this.whatFolder = this.str.includes("/") ? "/" : "\\";
+    this.token = this.tokenizer();
 }
 
 Path.prototype.isError = function() {
@@ -18,7 +19,7 @@ Path.prototype.tokenizer = function() {
     return result;
 }
 
-Path.prototype.lexer = function(token) {
+Path.prototype.parser = function(token) {
     const structure = {
         "root":token[0],
         "base":token[token.length-1],
@@ -33,17 +34,16 @@ Path.prototype.lexer = function(token) {
 
 Path.prototype.stringfy = function() {
     this.isError();
-    const token = this.tokenizer();
-    const structure = this.lexer(token);
+    const structure = this.parser(this.token);
     return structure;
 }
 
-// Path.prototype.pathComponents = function() {
-
-// }
+Path.prototype.appendComponents = function(component) {
+    this.token.splice(this.token.length-1,0,component);
+}
 
 // Path.prototype.deleteLastComponent = function() {
-
+//     this.token.splice(this.tokwn.length-2,1);
 // }
 
 // Path.prototype.relative(to) = function() {

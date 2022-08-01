@@ -3,7 +3,7 @@
 - [x] path 라이브러리 구현
 - [x] jest 설치
 - [x] jest matcher 구현
-- [ ] appendComponent method 구현
+- [x] appendComponent method 구현
 
 # 학습메모
 
