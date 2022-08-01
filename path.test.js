@@ -1,7 +1,21 @@
 const { Path } = require("./path.js");
 
 
+
+
 describe("Path 생성 Test", () => {
+
+
+  // 에러 케이스가 아닐 경우 오류 발생
+  test("Error Test", () => {
+    try {
+      new Path ("/a/a/a?a.md");
+      expect(false).toBe(true); // 위에서 catch되지 않는다면 강제 오류 발생
+    } catch (err) {
+      expect(err).toEqual('입력오류 : Path에는 다음 문자를 사용할 수 없습니다.\n : * ? " < > |');
+    }
+  })
+
   describe("Window Test", () => {
     const path = new Path("C:\\home\\user\\boost\\camp\\challenge\\day17\\problem.md");
     test("tokenizer Test", () => {

@@ -1,7 +1,7 @@
 const log = console.log;
 
 function Path(str) {
-    this.isError();
+    this.isError(str);
     this.str = str;
     this.token = this.tokenizer(str);
 }
@@ -25,9 +25,9 @@ Path.prototype.stringfy = function() {
 
 
 
-Path.prototype.isError = function() {
-    if (/[*?"<>|]/.test(this.str)) {
-        throw 'Path에는 다음 문자를 사용할 수 없습니다.\n : * ? " < > |';
+Path.prototype.isError = function(str) {
+    if (/[*?"<>|]/.test(str)) {
+        throw '입력오류 : Path에는 다음 문자를 사용할 수 없습니다.\n : * ? " < > |';
     }
 }
 

@@ -16,5 +16,4 @@ const result = strArr.map((x) => {
 
 log(result);
 
-
 module.exports = { multiplePath }
