@@ -1,0 +1,23 @@
+{
+  "name": "day11",
+  "version": "1.0.0",
+  "description": "- [x] path 라이브러리 구현\r - [ ] mocha 설치\r # 학습메모",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/179cc0cd89669231e492c1efa284d6da.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/179cc0cd89669231e492c1efa284d6da"
+  },
+  "homepage": "https://gist.github.com/179cc0cd89669231e492c1efa284d6da",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
