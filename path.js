@@ -26,6 +26,11 @@ Path.prototype.stringfy = function() {
 
 
 Path.prototype.isError = function(str) {
+    const whatOS = str.includes("/") ? /^\// : /^C:\\/;
+    if (!(whatOS.test(str))) {
+        throw '입력오류 : 절대경로가 아닙니다.'
+    }
+
     if (/[*?"<>|]/.test(str)) {
         throw '입력오류 : Path에는 다음 문자를 사용할 수 없습니다.\n : * ? " < > |';
     }
