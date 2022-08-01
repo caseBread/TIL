@@ -30,3 +30,6 @@
 
 
 [Jest 사용법](https://www.daleseo.com/jest-basic/)
+[jest error](https://it-timehacker.tistory.com/m/139)
+[window path](https://docs.microsoft.com/ko-kr/dotnet/standard/io/file-path-formats)
+[unit test](https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%9B_%ED%85%8C%EC%8A%A4%ED%8A%B8)
