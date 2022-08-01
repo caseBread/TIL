@@ -38,4 +38,16 @@ Path.prototype.stringfy = function() {
     return structure;
 }
 
+// Path.prototype.pathComponents = function() {
+
+// }
+
+// Path.prototype.deleteLastComponent = function() {
+
+// }
+
+// Path.prototype.relative(to) = function() {
+
+// }
+
 module.exports = { Path };

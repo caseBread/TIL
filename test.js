@@ -1,10 +1,15 @@
-const { Path } = require("../path.js");
+const { Path } = require("./path.js");
 
 
 
 test("Window Path Test", () => {
-    const path1 = new Path("C:\\home\\user\\boost\\camp\\challenge\\day17\\problem.md");
-    expect(path1.stringfy()).toEqual({
+  const str = "C:\\home\\user\\boost\\camp\\challenge\\day17\\problem.md";
+  const strArr = str.match(/^[A-Z]:[^:*?"<>|]*|[^:*?"<>|]+/gm)
+  const result = strArr.map((x) => {
+    const path = new Path(x);
+    return path.stringfy();
+  })
+    expect(result).toEqual([{
         root: 'C:\\',
         base: 'problem.md',
         ext: '.md',
@@ -21,12 +26,17 @@ test("Window Path Test", () => {
           'problem.md'
         ],
         absoluteString: 'C:\\home\\user\\boost\\camp\\challenge\\day17\\problem.md'
-      });
+      }]);
 })
 
 test("Unix Path Test", () => {
-    const path2 = new Path("/home/user/boost/camp/challenge/day17/problem.md");
-    expect(path2.stringfy()).toEqual({
+  const str = "/home/user/boost/camp/challenge/day17/problem.md";
+  const strArr = str.match(/^[A-Z]:[^:*?"<>|]*|[^:*?"<>|]+/gm)
+  const result = strArr.map((x) => {
+    const path = new Path(x);
+    return path.stringfy();
+  })
+    expect(result).toEqual([{
         root: '/',
         base: 'problem.md',
         ext: '.md',
@@ -39,5 +49,5 @@ test("Unix Path Test", () => {
           'day17', 'problem.md'
         ],
         absoluteString: '/home/user/boost/camp/challenge/day17/problem.md'
-      });
+      }]);
 })
