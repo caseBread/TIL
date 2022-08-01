@@ -8,7 +8,7 @@
 - [x] deleteLastComponent method 구현
 - [x] relative method 구현
 - [ ] TC 구현
-    - [ ] method 당 TC 구현
+    - [x] method 당 TC 구현
     - [ ] error TC 구현
 
 # 학습메모
