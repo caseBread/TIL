@@ -2,8 +2,6 @@ const log = console.log;
 
 function Path(str) {
     this.str = str;
-    this.whatFolder = this.str.includes("/") ? "/" : "\\";
-    this.token = this.tokenizer();
 }
 
 Path.prototype.isError = function() {
@@ -12,10 +10,11 @@ Path.prototype.isError = function() {
     }
 }
 
-Path.prototype.tokenizer = function() {
+Path.prototype.tokenizer = function(str) {
     
-    const result = (this.str.includes("/")) ? this.str.split("/") : this.str.split("\\");
-    result[0] = result[0] + this.whatFolder;
+    const result = (str.includes("/")) ? str.split("/") : str.split("\\");
+    const whatFolder = str.includes("/") ? "/" : "\\";
+    result[0] = result[0] + whatFolder;
     return result;
 }
 
@@ -34,7 +33,8 @@ Path.prototype.parser = function(token) {
 
 Path.prototype.stringfy = function() {
     this.isError();
-    const structure = this.parser(this.token);
+    const token = this.tokenizer(this.str);
+    const structure = this.parser(token);
     return structure;
 }
 
@@ -42,12 +42,27 @@ Path.prototype.appendComponents = function(component) {
     this.token.splice(this.token.length-1,0,component);
 }
 
-// Path.prototype.deleteLastComponent = function() {
-//     this.token.splice(this.tokwn.length-2,1);
-// }
+Path.prototype.deleteLastComponent = function() {
+    this.token.splice(this.tokwn.length-2,1);
+}
 
-// Path.prototype.relative(to) = function() {
-
-// }
+Path.prototype.relative = function(to) {
+    // 좀더 함수형으로 수정 필요
+    const toToken = this.tokenizer(to);
+    const thisToken = this.tokenizer(this.str);
+    let cnt = 0;
+    for (let i = 0; i < thisToken.length; i++) {
+        if (thisToken[i] !== toToken[i]) {
+            break; 
+        }
+        cnt++;
+    }
+    let result = "/..".repeat(thisToken.length-cnt).substring(1);
+    for (let i = cnt; i < toToken.length; i++) {
+        result += "/"+toToken[i];
+    }
+    return result;
+    
+}
 
 module.exports = { Path };
