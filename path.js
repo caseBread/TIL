@@ -1,14 +1,37 @@
 const log = console.log;
 
 function Path(str) {
+    this.isError();
     this.str = str;
+    this.token = this.tokenizer(str);
 }
+
+Path.prototype.absoluteString = function() {
+    const Token = [ ...this.token ];
+
+    const whatFolder = this.str.includes("/") ? "/" : "\\";
+    Token[0] = Token[0].replace(whatFolder,"");
+    return Token.join(whatFolder);
+}
+
+Path.prototype.getToken = function() {
+    return this.token;
+}
+
+Path.prototype.stringfy = function() {
+    const structure = this.parser(this.token);
+    return structure;
+}
+
+
 
 Path.prototype.isError = function() {
     if (/[*?"<>|]/.test(this.str)) {
         throw 'Path에는 다음 문자를 사용할 수 없습니다.\n : * ? " < > |';
     }
 }
+
+
 
 Path.prototype.tokenizer = function(str) {
     
@@ -25,41 +48,34 @@ Path.prototype.parser = function(token) {
         "ext":"."+token[token.length-1].split(".")[1],
         "name":token[token.length-1].split(".")[0],
         "lastDirectory":token[token.length-2],
-        "components":token, // 맨처음 /추가 구현 필요
-        "absoluteString":this.str,
+        "components":token, 
     }
     return structure;
 }
 
-Path.prototype.stringfy = function() {
-    this.isError();
-    const token = this.tokenizer(this.str);
-    const structure = this.parser(token);
-    return structure;
-}
 
 Path.prototype.appendComponents = function(component) {
     this.token.splice(this.token.length-1,0,component);
 }
 
 Path.prototype.deleteLastComponent = function() {
-    this.token.splice(this.tokwn.length-2,1);
+    this.token.splice(this.token.length-2,1);
 }
 
 Path.prototype.relative = function(to) {
     // 좀더 함수형으로 수정 필요
+    const whatFolder = this.str.includes("/") ? "/" : "\\";
     const toToken = this.tokenizer(to);
-    const thisToken = this.tokenizer(this.str);
     let cnt = 0;
-    for (let i = 0; i < thisToken.length; i++) {
-        if (thisToken[i] !== toToken[i]) {
+    for (let i = 0; i < this.token.length; i++) {
+        if (this.token[i] !== toToken[i]) {
             break; 
         }
         cnt++;
     }
-    let result = "/..".repeat(thisToken.length-cnt).substring(1);
+    let result = (whatFolder+"..").repeat((this.token.length-1)-cnt).substring(1);
     for (let i = cnt; i < toToken.length; i++) {
-        result += "/"+toToken[i];
+        result += whatFolder+toToken[i];
     }
     return result;
     
