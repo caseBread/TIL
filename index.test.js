@@ -22,7 +22,7 @@ describe("복수 Path 요소 지원 생성자 Test", () => {
       });
   
       const strArr2 = multiplePath("/home/user/boost/camp.md:/challenge/day17/problem.md");
-      test("2개로 나뉘는 경우", () => {
+      test("여러개로 나뉘는 경우", () => {
         expect(strArr2.length).toBe(2);
       })
     })
