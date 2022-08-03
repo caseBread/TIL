@@ -2,8 +2,8 @@ const { network } = require("./networkLayer");
 
 const log = console.log;
 
-const printSegment = (segment, isSend) => {
-    (isSend) ? log(">> Sending") : log("<< Receiving");
+const printSegment = (segment) => {
+    log(">> Sending")
     log(segment);
 }
 
@@ -23,7 +23,7 @@ class SendingHost {
             newSegment.sequenceNumber = 10;
             newSegment.ackNumber = null;
             newSegment.contentLength = 0;
-            printSegment(newSegment, true)
+            printSegment(newSegment)
 
             const segmentToList = Object.values(newSegment);
             network("["+segmentToList.join(",")+"]");
@@ -37,7 +37,7 @@ class SendingHost {
             newSegment.sequenceNumber = segment.ackNumber;
             newSegment.ackNumber = segment.sequenceNumber+1;
             newSegment.contentLength = 0;
-            printSegment(newSegment, true)
+            printSegment(newSegment)
 
             const segmentToList = Object.values(newSegment);
             network("["+segmentToList.join(",")+"]");
@@ -65,7 +65,7 @@ class SendingHost {
             newSegment.ackNumber = segment.sequenceNumber+1;
             newSegment.data = this.data.shift();
             newSegment.contentLength = newSegment.data.length;
-            printSegment(newSegment, true)
+            printSegment(newSegment)
 
             const segmentToList = Object.values(newSegment);
             network("["+segmentToList.join(",")+"]");
