@@ -1,8 +1,9 @@
+const { incodeBase64 } = require("./base64");
 const { session } = require("./txSessionLayer");
 
 const presentation = (message) => {
     const newMessage = [ ...message ];
-    newMessage[4] = Buffer.from(newMessage[4], "utf8").toString('base64');
+    newMessage[4] = incodeBase64(newMessage[4]);
     session(newMessage);
 }
 
