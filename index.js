@@ -33,12 +33,6 @@ rl.on('close', () => {
 })
 
 const main = () => {
-    [ from, to, title, file ] = [
-        "jk@boostcamp.connect.or.kr", 
-        "camper@boostcamp.connect.or.kr", 
-        "Hello World", 
-        "Hello BoostCamper,\r\n\tThis message written by JK." 
-    ];
     application(from,to,title,file);
 
 }
