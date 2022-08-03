@@ -1,21 +1,76 @@
-const { network } = require("./networkLayer");
+const { APR } = require("./APR");
 
 const log = console.log;
 
-const printSegment = (segment) => {
-    log(">> Sending")
+const printSegment = (segment, isSend) => {
+    (isSend) ? log(">> Sending") : log("<< Risiving")
     log(segment);
 }
 
-class SendingHost {
-    constructor(data) {
+class Host {
+    constructor(data = "", ip = null) {
         this.data = data;
         this.sendingPort = 10001;
         this.receivingPort = 8080;
+        this.object = null;
+        this.ip = ip;
     }
 
-    async sending(object, segment) {
-        if (segment.sendingPocket === null) {
+    setObject(object) {
+        this.otherObject = object
+    }
+
+    network = (segment) => {
+        const sendIP = "192.168.1.5";
+        const receiveIP = "192.168.1.9";
+        const datagram = "{"+sendIP+","+receiveIP+","+segment+"}";
+        this.dataLink(datagram);
+    }
+
+    rxNetwork = (datagram) => {
+        const IP = "192.168.1.5"
+        const destinationIP = datagram.substr(1,11);
+        const sendIP = datagram.substr(12,11);
+        if (IP !== destinationIP) return;
+        const segment = datagram.substring(25,datagram.length-1);
+        this.sending(segment);
+    }
+
+    dataLink = (datagram) => {
+        const [ sendIP, receiveIP ] = [ datagram.substr(1,11), datagram.substr(13,11) ];
+        const frame = "("+APR[receiveIP]+","+APR[sendIP]+","+datagram+")";
+        this.physical(frame);
+    }
+
+    rxDataLink = (frame) => {
+        const MAC = APR["192.168.1.9"]
+        const destinationMAC = frame.substr(1,17);
+        const sendingMAC = frame.substr(18,17);
+        if (MAC !== destinationMAC) return;
+        const datagram = frame.substring(37,frame.length-1);
+        this.rxNetwork(datagram);
+    }
+
+    physical = (frame) => {
+        let hex = ""
+        for (let i = 0; i < frame.length; i++) {
+            hex += frame.charCodeAt(i).toString(16); // 문자 => 16진수
+        }
+        this.otherObject.rxPhysical(hex);
+    }
+
+    rxPhysical = (hex) => {
+        // hex to string
+        let frame = ""
+        for (let i = 0; i < hex.length; i+=2) {
+            frame += String.fromCharCode(parseInt(hex.substr(i,2),16));
+        }
+        this.rxDataLink(frame);
+    }
+
+    async sending(segment) {
+        const segmentArr = segment.replace(/[\[\]]/g,"").split(",");
+        if (segment === "") { 
             const newSegment = new Object();
             newSegment.sendingPocket = "SYN";
             newSegment.sourcePort = this.sendingPort;
@@ -23,94 +78,80 @@ class SendingHost {
             newSegment.sequenceNumber = 10;
             newSegment.ackNumber = null;
             newSegment.contentLength = 0;
-            printSegment(newSegment)
+            printSegment(newSegment, true)
 
             const segmentToList = Object.values(newSegment);
-            network("["+segmentToList.join(",")+"]");
-            //await object.receiving(this,newSegment);
+            this.network("["+segmentToList.join(",")+"]");
 
-        } else if (segment.sendingPocket === "SYN+ACK") {
+        } else if (segment.substr(1,7) === "SYN+ACK") {
             const newSegment = new Object();
             newSegment.sendingPocket = "ACK";
             newSegment.sourcePort = this.sendingPort;
             newSegment.destinationPort = this.receivingPort;
-            newSegment.sequenceNumber = segment.ackNumber;
-            newSegment.ackNumber = segment.sequenceNumber+1;
+            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.ackNumber = Number(segmentArr[3])+1;
             newSegment.contentLength = 0;
-            printSegment(newSegment)
-
-            const segmentToList = Object.values(newSegment);
-            network("["+segmentToList.join(",")+"]");
-            //await object.receiving(this,newSegment);
+            printSegment(newSegment, true) // 프린트만해줘
 
             newSegment.sendingPocket = "DATA";
             newSegment.sourcePort = this.sendingPort;
             newSegment.destinationPort = this.receivingPort;
             newSegment.sequenceNumber = 112;
             newSegment.ackNumber = null;
-            newSegment.data = this.data.shift();
-            newSegment.contentLength = newSegment.data.length;
+            const data = this.data.shift();
+            newSegment.contentLength = data.length;
+            newSegment.data = data;
+            
             printSegment(newSegment, true)
 
-            const segmentToList2 = Object.values(newSegment);
-            network("["+segmentToList2.join(",")+"]");
-            //await object.receiving(this,newSegment);
-
-        } else if (segment.sendingPocket === "ACK" && this.data.length !== 0) {
-            const newSegment = new Object();
-            newSegment.sendingPocket = "DATA";
-            newSegment.sourcePort = this.sendingPort;
-            newSegment.destinationPort = this.receivingPort;
-            newSegment.sequenceNumber = segment.ackNumber;
-            newSegment.ackNumber = segment.sequenceNumber+1;
-            newSegment.data = this.data.shift();
-            newSegment.contentLength = newSegment.data.length;
-            printSegment(newSegment)
-
             const segmentToList = Object.values(newSegment);
-            network("["+segmentToList.join(",")+"]");
-            //await object.receiving(this,newSegment);
+            this.network("["+segmentToList.join(",")+"]");
 
-        } else if (segment.sendingPocket === "ACK" && this.data.length === 0) {
-            return;
-
-        } else {
-            throw new Error("wrong pocket name");
-        }
-    }
-}
-
-class ReceivingHost {
-    constructor() {
-        this.sendingPort = 10001;
-        this.receivingPort = 8080;
-    }
-
-    async receiving(object, segment) {
-        if (segment.sendingPocket === "SYN") {
+        } else if (segment.substr(1,3) === "SYN") {
             const newSegment = new Object();
             newSegment.sendingPocket = "SYN+ACK";
             newSegment.sourcePort = this.receivingPort;
             newSegment.destinationPort = this.sendingPort;
             newSegment.sequenceNumber = 100;
-            newSegment.ackNumber = segment.sequenceNumber+1;
+            newSegment.ackNumber = Number(segmentArr[3])+1;
             newSegment.contentLength = 0;
             printSegment(newSegment, false)
-            await object.sending(this,newSegment);
+            const segmentToList = Object.values(newSegment);
+            this.network("["+segmentToList.join(",")+"]");
 
-        } else if (segment.sendingPocket === "DATA") {
+        }  else if (segment.substr(1,4) === "DATA") {23
+            this.data += segmentArr[segmentArr.length-1];
             const newSegment = new Object();
             newSegment.sendingPocket = "ACK";
             newSegment.sourcePort = this.receivingPort;
             newSegment.destinationPort = this.sendingPort;
-            newSegment.sequenceNumber = segment.ackNumber;
-            newSegment.ackNumber = segment.sequenceNumber+1;
+            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.ackNumber = Number(segmentArr[3])+1;
             newSegment.contentLength = 0;
             printSegment(newSegment, false)
-            await object.sending(this,newSegment);
 
-        } else if (segment.sendingPocket === "ACK") {
+            const segmentToList = Object.values(newSegment);
+            this.network("["+segmentToList.join(",")+"]");
+
+        } else if (segment.substr(1,3) === "ACK" && this.data.length !== 0) {
+            const newSegment = new Object();
+            newSegment.sendingPocket = "DATA";
+            newSegment.sourcePort = this.sendingPort;
+            newSegment.destinationPort = this.receivingPort;
+            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.ackNumber = Number(segmentArr[3])+1;
+            const data = this.data.shift();
+            newSegment.contentLength = data.length;
+            newSegment.data = data;
+            
+            printSegment(newSegment, true)
+
+            const segmentToList = Object.values(newSegment);
+            this.network("["+segmentToList.join(",")+"]");
+
+        } else if (segment.substr(1,3) === "ACK" && this.data.length === 0) {
             return;
+
         } else {
             throw new Error("wrong pocket name");
         }
@@ -124,21 +165,14 @@ const transport = (message) => {
         data.push(message.substr(i,100));
     }
     log(">> data: ",data); 
-    const segment = {
-        sendingPocket: null,
-        sourcePort: null,
-        destinationPort: null,
-        sequenceNumber: null,
-        ackNumber: null,
-        contentLength: 0,
-        data: data,
-    }
+    const segment = "";
 
-    const sendingHost = new SendingHost(data);
-    const receivingHost = new ReceivingHost();
-
-    sendingHost.sending(receivingHost, segment);
-     
+    const sendingHost = new Host(data, "192.168.1.5");
+    const receivingHost = new Host("","192.168.1.9");
+    sendingHost.setObject(receivingHost);
+    receivingHost.setObject(sendingHost);
+    sendingHost.sending(segment);
+    log(receivingHost.data)
 }
 
 module.exports = { transport }

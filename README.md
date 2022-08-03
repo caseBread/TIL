@@ -20,12 +20,23 @@
 
 ===========================
 
-
+- [x] 수신 물리계층 구현
+- [x] 수신 데이터링크계층 구현
+    - [x] 수신 데이터링크 계층 헤더 제거, MAC 주소 비교 구현
+- [x] 수신 네트워크계층 구현
+    - [x] 수신 네트워크 계층 헤더 제거, IP 주소 비교 구현
+- [x] 수신 전송계층 구현
+    - [x] 수신 전송 계층 3-way 핸드쉐이크 (SYN+ACK, DATA+ACK) 구현
+    - [x] 수신 전송 계층 세그멘트 합치기 처리 구현
 
 
 # 학습메모
 
 * 계층간 이동 및 PDU 종류 
+
+* 데이터 전송 시에도 syn ack 번호 규칙이 같다 ??
+
+![](https://user-images.githubusercontent.com/45806836/98881108-a11ea300-24cc-11eb-9c62-12d58c635f96.png)
 
 ![](https://velog.velcdn.com/images%2Fkong2520%2Fpost%2Fa3be4a83-e74d-45c3-9c84-e030224db2be%2Fimage.png)
 
@@ -36,3 +47,4 @@
 [UUID v4](https://www.huskyhoochu.com/what-is-uuid/)
 
 [js 문자 ascii 변환](https://www.delftstack.com/ko/howto/javascript/javascript-convert-character-code-to-ascii-code/)
+
