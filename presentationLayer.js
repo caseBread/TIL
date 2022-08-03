@@ -3,7 +3,7 @@ const { session } = require("./sessionLayer");
 const presentation = (message) => {
     const newMessage = [ ...message ];
     newMessage[4] = Buffer.from(newMessage[4], "utf8").toString('base64');
-    return session(newMessage);
+    session(newMessage);
 }
 
 module.exports = { presentation }
