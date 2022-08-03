@@ -36,6 +36,9 @@
 
 * 데이터 전송 시에도 syn ack 번호 규칙이 같다 ??
 
+* 다른 파일 간 동시 참조 불가능 ?!!!
+ex ) a.js 에서 b.js에 있는 bfunc 함수 호출 => bfunc 함수에서 a.js 에 있는 afunc 함수 참조 시 에러 ?!?!?!?!
+
 ![](https://user-images.githubusercontent.com/45806836/98881108-a11ea300-24cc-11eb-9c62-12d58c635f96.png)
 
 ![](https://velog.velcdn.com/images%2Fkong2520%2Fpost%2Fa3be4a83-e74d-45c3-9c84-e030224db2be%2Fimage.png)

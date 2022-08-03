@@ -1,5 +1,7 @@
 const uuid = require("uuid");
 const { transport } = require("./transportLayer");
+const log = console.log;
+
 
 const session = (message) => {
     const newMessage = [ ...message ];

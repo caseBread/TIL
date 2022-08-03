@@ -1,4 +1,4 @@
-const { session } = require("./sessionLayer");
+const { session } = require("./txSessionLayer");
 
 const presentation = (message) => {
     const newMessage = [ ...message ];

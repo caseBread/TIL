@@ -1,19 +1,22 @@
 const { APR } = require("./APR");
+const { rxSession } = require("./rxSessionLayer");
+
 
 const log = console.log;
 
 const printSegment = (segment, isSend) => {
-    (isSend) ? log(">> Sending") : log("<< Risiving")
+    (isSend) ? log(">> Sending") : log("<< Receiving")
     log(segment);
 }
 
 class Host {
-    constructor(data = "", ip = null) {
+    constructor(data = "", ip1, ip2) {
         this.data = data;
         this.sendingPort = 10001;
         this.receivingPort = 8080;
         this.object = null;
-        this.ip = ip;
+        this.sendIp = ip1;
+        this.receiveIp = ip2
     }
 
     setObject(object) {
@@ -33,6 +36,8 @@ class Host {
         const sendIP = datagram.substr(12,11);
         if (IP !== destinationIP) return;
         const segment = datagram.substring(25,datagram.length-1);
+        log("================= 수신 네트워크계층 ======================");
+        log(segment);
         this.sending(segment);
     }
 
@@ -48,13 +53,25 @@ class Host {
         const sendingMAC = frame.substr(18,17);
         if (MAC !== destinationMAC) return;
         const datagram = frame.substring(37,frame.length-1);
+        log("================= 수신 데이터링크계층 ======================");
+        log(datagram)
         this.rxNetwork(datagram);
     }
 
     physical = (frame) => {
         let hex = ""
         for (let i = 0; i < frame.length; i++) {
-            hex += frame.charCodeAt(i).toString(16); // 문자 => 16진수
+            let convertCharToHex = ""
+            if (frame[i] === '\r') {
+                convertCharToHex = "0D"
+            } else if (frame[i] === '\n') {
+                convertCharToHex = "0A"
+            } else if (frame[i] === '\t') {
+                convertCharToHex = "09"
+            } else {
+                convertCharToHex = frame.charCodeAt(i).toString(16)
+            }
+            hex += convertCharToHex; // 문자 => 16진수
         }
         this.otherObject.rxPhysical(hex);
     }
@@ -65,6 +82,8 @@ class Host {
         for (let i = 0; i < hex.length; i+=2) {
             frame += String.fromCharCode(parseInt(hex.substr(i,2),16));
         }
+        log("================= 수신 물리계층 ======================");
+        log(frame)
         this.rxDataLink(frame);
     }
 
@@ -88,7 +107,7 @@ class Host {
             newSegment.sendingPocket = "ACK";
             newSegment.sourcePort = this.sendingPort;
             newSegment.destinationPort = this.receivingPort;
-            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.sequenceNumber = Number(segmentArr[4]);
             newSegment.ackNumber = Number(segmentArr[3])+1;
             newSegment.contentLength = 0;
             printSegment(newSegment, true) // 프린트만해줘
@@ -125,7 +144,7 @@ class Host {
             newSegment.sendingPocket = "ACK";
             newSegment.sourcePort = this.receivingPort;
             newSegment.destinationPort = this.sendingPort;
-            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.sequenceNumber = Number(segmentArr[4]);;
             newSegment.ackNumber = Number(segmentArr[3])+1;
             newSegment.contentLength = 0;
             printSegment(newSegment, false)
@@ -138,7 +157,7 @@ class Host {
             newSegment.sendingPocket = "DATA";
             newSegment.sourcePort = this.sendingPort;
             newSegment.destinationPort = this.receivingPort;
-            newSegment.sequenceNumber = segmentArr[4];
+            newSegment.sequenceNumber = Number(segmentArr[4]);;
             newSegment.ackNumber = Number(segmentArr[3])+1;
             const data = this.data.shift();
             newSegment.contentLength = data.length;
@@ -167,12 +186,12 @@ const transport = (message) => {
     log(">> data: ",data); 
     const segment = "";
 
-    const sendingHost = new Host(data, "192.168.1.5");
-    const receivingHost = new Host("","192.168.1.9");
+    const sendingHost = new Host(data, "192.168.1.5", "192.168.1.9");
+    const receivingHost = new Host("", "192.168.1.5", "192.168.1.9");
     sendingHost.setObject(receivingHost);
     receivingHost.setObject(sendingHost);
     sendingHost.sending(segment);
-    log(receivingHost.data)
+    rxSession(receivingHost.data);
 }
 
 module.exports = { transport }
