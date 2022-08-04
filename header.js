@@ -20,6 +20,9 @@ const getHeader = async (url,isMain) => {
 
 const getheader = (url, isMain) => {
     return new Promise((resolve,reject) => {
+        let responseStart = new Date();
+        let flag = false;
+        let downloadStart;
         const resData = {}
         let srcList = null;
         const request = https.request(url, (response) => {
@@ -33,10 +36,18 @@ const getheader = (url, isMain) => {
             
             let data = ''
             response.on('data', (chunk) => {
+                if (!flag) {
+                    flag = true;
+                    let responseEnd = new Date();
+                    downloadStart = new Date();
+                    resData["responseTime"] = (responseEnd-responseStart)+"ms";
+                }
                 data += chunk.toString("utf8")
             });
         
             response.on('end', () => {
+                let downloadEnd = new Date();
+                resData["downloadTime"] = (downloadEnd-downloadStart)+"ms";
                 if (isMain) {
                     resData["fileName"] = resData["domain"];
                     resData["path"] = "/";
