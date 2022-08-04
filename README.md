@@ -46,6 +46,8 @@
 
 - transportLayer에서 ip를 멤버변수에서 못가져오는 오류 고치기
 - transportLayer에서 객체입력 문자열로 고치기
+- \t\n\r 변환과정 위치바꾸기 (물리 -> 더 높은 적당한 어딘가)
+- sequence Number length만큼 증가 구현
 
 # 학습메모
 
@@ -55,7 +57,7 @@
 
 * 다른 파일 간 동시 참조 불가능 ?!!!   ex ) a.js 에서 b.js에 있는 bfunc 함수 호출 => bfunc 함수에서 a.js 에 있는 afunc 함수 참조 시 에러 ?!?!?!?!
 
-* 데이터 전송 시에도 syn ack 번호 규칙이 같다 ??
+* 데이터 전송 시에도 syn ack 번호 규칙이 같다 ?? ==> 아니다! data길이만큼 증가
 
 ![](https://user-images.githubusercontent.com/45806836/98881108-a11ea300-24cc-11eb-9c62-12d58c635f96.png)
 
