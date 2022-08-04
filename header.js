@@ -20,9 +20,11 @@ const getHeader = async (url,isMain) => {
 
 const getheader = (url, isMain) => {
     return new Promise((resolve,reject) => {
-        let responseStart = new Date();
-        let flag = false;
+        let waitStart = new Date();
+        let waitEnd;
         let downloadStart;
+        let downloadEnd;
+        let flag = false;
         const resData = {}
         let srcList = null;
         const request = https.request(url, (response) => {
@@ -32,22 +34,22 @@ const getheader = (url, isMain) => {
             resData["scheme"] = "https"
             resData["path"] = pathArr.slice(0,-1).join("/");
             resData["type"] = response.headers["content-type"];
-            resData["size"] = Number(response.headers["content-length"])/1000+"KB"
-            
+            resData["size"] = Number(response.headers["content-length"])/1000+" kb"
+            resData["redirect"] = (300 <= response.statusCode  && response.statusCode < 400)
             let data = ''
             response.on('data', (chunk) => {
                 if (!flag) {
                     flag = true;
-                    let responseEnd = new Date();
+                    waitEnd = new Date();
                     downloadStart = new Date();
-                    resData["responseTime"] = (responseEnd-responseStart)+"ms";
+                    resData["waitTime"] = (waitEnd-waitStart)+" ms";
                 }
                 data += chunk.toString("utf8")
             });
         
             response.on('end', () => {
-                let downloadEnd = new Date();
-                resData["downloadTime"] = (downloadEnd-downloadStart)+"ms";
+                downloadEnd = new Date();
+                resData["downloadTime"] = (downloadEnd-downloadStart)+" ms";
                 if (isMain) {
                     resData["fileName"] = resData["domain"];
                     resData["path"] = "/";
@@ -64,18 +66,6 @@ const getheader = (url, isMain) => {
             reject('An error', error);
         });
         request.end() 
-    })
-}
-
-const re = (src) => {
-    log(src);
-    https.get(src,(res) => {
-    })
-}
-
-const reGet = ($src) => {
-    $src.forEach((x,i) => {
-        re(x);
     })
 }
 
