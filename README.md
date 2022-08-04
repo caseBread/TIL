@@ -27,3 +27,11 @@
 - [ ] 캐싱 데이터 측정 및 출력
 
 # 학습 메모
+
+[web packet 분석](https://secure-key.tistory.com/45)
+
+[chunk](https://mutpp.tistory.com/10)
+
+[how to distinguish redirect](https://stackoverflow.com/questions/43347422/how-do-i-distinguish-a-automatic-redirect-from-a-user-intended-redirect-a-click)
+
+[redirect code](https://im-first-rate.tistory.com/73)
