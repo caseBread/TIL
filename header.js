@@ -28,6 +28,7 @@ const getheader = (url, isMain) => {
         const resData = {}
         let srcList = null;
         const request = https.request(url, (response) => {
+            log(response.headers)
             const pathArr = response["req"]["path"].split("/");
             resData["fileName"] = pathArr[pathArr.length-1]
             resData["domain"] = response["req"]["host"];

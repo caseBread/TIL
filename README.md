@@ -40,6 +40,22 @@ http cache는  오래 담아두어서는 안된다.
 
 캐시의 유효기간과 비슷한 방식인 FIFO 알고리즘을 통해 캐시를 구현함.
 
+
+## readline-sync
+
+js에서 python의 input처럼 입력을 받을 수 있게 해주는 모듈이다.
+
+먼저 npm을 통해 readline-sync 모듈을 설치해주어야 한다.
+
+```npm install readline-sync```
+
+그리고 사용법은 다음과 같다.
+
+```
+const readlineSync = require("readline-sync")
+const input = readlineSync.question("please enter the input")
+```
+
 [web packet 분석](https://secure-key.tistory.com/45)
 
 [chunk](https://mutpp.tistory.com/10)

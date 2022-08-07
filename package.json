@@ -18,6 +18,7 @@
   "homepage": "https://gist.github.com/350a28c7a4cc26cdc0ebae7527d2b35b",
   "dependencies": {
     "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "readline-sync": "^1.4.10"
   }
 }

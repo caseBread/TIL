@@ -1,12 +1,26 @@
 const https = require("https");
-
+const readlineSync = require("readline-sync")
 const { getHeader } = require("./header");
 const log = console.log;
 
-const url = 'https://m.naver.com/'
+
 
 const cache = []
 let cacheCount = 0;
+
+const isHttp = (url) => {
+    if (url.startsWith("http://")) {
+        return true;
+    }
+    return false;
+}
+
+const isRedirect = (url) => {
+    if (!url.startsWith("https://")) {
+        return true;
+    }
+    return false;
+}
 
 const cacheReplace = (x, srcData) => {
     cache.push([x, srcData]);
@@ -34,6 +48,13 @@ const main = async () => {
     let codeCount = 0;
     let sizeSum = 0;
     let redirectCount = 0;
+
+    let url = readlineSync.question("please enter url : ")
+    if (isHttp(url)) throw "Do not support http";
+    if (isRedirect(url)) {
+        url = "https://" + url;
+        redirectCount++;
+    }
     
     const domainArr = new Set();
     const startRequest = new Date();
