@@ -1,5 +1,4 @@
 const { Event } = require("./event");
-const { objectMap } = require("./util");
 const events = require("events");
 const log = console.log;
 const stringLength = 80;
