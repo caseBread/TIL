@@ -38,12 +38,12 @@ class EventManager {
         this.subscribers[key].push(value);
     }
 
-    postEvent_delay(event, keys, completed, delayTime) {
+    async postEvent_delay(event, keys, completed, delayTime) {
         if (completed) return;
         log(`\/\/ ${event.getSender()} post "${event.getName()}" by ${delayTime}ms delay`.padEnd(stringLength, '='))
-        keys.forEach((key,i) => {
+        for (const key of keys) {
             if (this.subscribers[key]) {
-                completed = new Promise((resolve,reject) => {
+                completed = await new Promise((resolve,reject) => {
                     setTimeout(() => {
                         resolve(myEmitter.emit(key, event));
                     },delayTime);
@@ -51,18 +51,18 @@ class EventManager {
                 // setTimeout으로 return값을 받을 수 있나..?
                 // 근데 여기도 flag가 필요한가??
             }
-        })
+        }
     }
 
-    postEvent_async(event, keys, completed) {
+    async postEvent_async(event, keys, completed) {
         if (completed) return;
         log(`\/\/ ${event.getSender()} post "${event.getName()}" by asynchronize`.padEnd(stringLength, '='))
-        keys.forEach((key,i) => {
+        for (const key of keys) {
             if (this.subscribers[key]) {
-                completed = myEmitter.emit(key, event); // handler의 parameter로 event
+                completed = await new Promise(async (resolve,reject) => resolve(await myEmitter.emit(key, event))); // handler의 parameter로 event
                 // 여기 flag 를 어따 써먹지..?
             }
-        })
+        }    
     }
 
     postEvent_sync(event, keys) {
@@ -74,7 +74,7 @@ class EventManager {
         })
     }
 
-    postEvent(name, sender, userData, completed, delayTime) {
+    async postEvent(name, sender, userData, completed, delayTime) {
         const event = new Event(name, sender, userData); // create event
         const eventName = event.getName();
         const senderName = event.getSender();
@@ -86,10 +86,10 @@ class EventManager {
 
         switch(arguments.length) {
             case 5 :
-                this.postEvent_delay(event, keys, completed, delayTime);
+                await this.postEvent_delay(event, keys, completed, delayTime);
                 break;
             case 4 :
-                this.postEvent_async(event, keys, completed);
+                await this.postEvent_async(event, keys, completed);
                 break;
             case 3 :
                 this.postEvent_sync(event, keys);

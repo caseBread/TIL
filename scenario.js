@@ -28,9 +28,8 @@ const main = async () => {
         return flag = true;
     })
 
-    // sync
-    event.postEvent("ModelDataChanged", "albumModel", {"data":"abc"});
-    log();
+    
+    
 
     // delay
     event.postEvent("ViewUpdated", "albumView", {"view": "xxx"}, false, 3000);
@@ -40,11 +39,12 @@ const main = async () => {
     event.postEvent("AllDataChanged", "dummy", {}, false);
     log();
 
-    // remove
-    await event.remove("subscriberD");
+    // sync
+    event.postEvent("ModelDataChanged", "albumModel", {"data":"abc"});
+    log();
 
     // async
-    event.postEvent("AllDataChanged", "dummy", {}, false);
+    await event.postEvent("AllDataChanged", "dummy", {}, false);
     log();
 
     // async && completed flag = true
