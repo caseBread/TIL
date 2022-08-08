@@ -26,9 +26,7 @@
 
 # 학습메모
 
-## padStart, padEnd
 
-줄간격 맞추는 method
 
 ## worker thread 구현 관련...
 
@@ -39,20 +37,19 @@ C++의 경우 thread 생성 시 글로벌 변수를 참조할 수 있기 때문�
 
 ## 비동기방식, 지연방식 postEvent()
 
-먼저 동작별 메소드를 만들기로 선택함.
-
-비동기방식의 경우 parameter로 completed flag 추가
-
-지연방식의 경우 parameter로 completed flag와 delayTime 추가
-
-따라서, 동기, 비동기, 지연방식의 postEvent가 파라미터 개수에 따라 각각 인식될 수 있다.
+* 동작별 메소드를 만들기로 선택함.
+* 비동기방식의 경우 parameter로 completed flag 추가
+* 지연방식의 경우 parameter로 completed flag와 delayTime 추가
+* 따라서, 동기, 비동기, 지연방식의 postEvent가 파라미터 개수에 따라 각각 인식될 수 있다.
 
 ### 의문점.
 
 * flag가 true일때 handler의 실행을 막으면 flag의 역할이 끝 인건지..
 * 지연방식에도 flag가 필요한지..
 
+## padStart, padEnd
 
+줄간격 맞추는 method
 
 
 ```"string".padStart(num,char)``` : num개 문자열이 되도록 문자열 앞에 char로 채운다
