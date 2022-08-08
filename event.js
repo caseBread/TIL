@@ -2,7 +2,7 @@ class Event {
     #name;
     #sender;
     #userData;
-    
+
     constructor (name, sender, userData) {
         this.#name = name;
         this.#sender = sender;
@@ -18,6 +18,8 @@ class Event {
     }
 
     getUserData() {
-        return this.#userData;
+        return JSON.stringify(this.#userData);
     }
 }
+
+module.exports = { Event }
