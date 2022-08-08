@@ -1,43 +1,50 @@
 const { Event } = require("./event");
+const { objectMap } = require("./util");
 const log = console.log;
-
+const stringLength = 80;
 class EventManager {
     constructor() {
-        this.initialize();
+        this.sharedInstance();
     }
 
-    initialize() {
-        this.listeners = {};
+    sharedInstance() {
+        if (!this.publishers) {
+            this.publishers = {};
+        }
+        return this.publishers;
     }
 
     add(subscriber, event, sender, handler) {
         const key = [event,sender];
         const value = [subscriber, handler];
-        if (!this.listeners[key]) {
-            this.listeners[key] = [];
+        if (!this.publishers[key]) {
+            this.publishers[key] = [];
         }
-        this.listeners[key].push(value);
-    }
-
-    printEvent(subscriber, eventName, sender, userData) {
-        log(`${subscriber}: ${eventName} event from ${sender} userData = ${userData}`);
+        this.publishers[key].push(value);
     }
 
     subscribeHandler(event) {
         const eventName = event.getName();
         const senderName = event.getSender();
+        const userDataName = event.getUserData();
         const keys = [
             [ eventName, senderName ],
             [ "", senderName ],
             [ eventName, undefined ],
             [ "", undefined ],
         ]
+
+        log(`\/\/ ${senderName} post "${eventName}" `.padEnd(stringLength, '='))
         keys.forEach((key,i) => {
-            if (this.listeners[key]) {
-                this.printEvent(this.listeners[key][0], eventName, senderName, this.listeners[key][1]);
+            if (this.publishers[key]) {
+                this.publishers[key].forEach((publisher,i) => {
+                    log(`${publisher[0]}: ${eventName} event from ${senderName} userData = ${userDataName}`);
+                })
+                
 
             }
         })
+        
     }
 
     postEvent(name, sender, userData) {
@@ -46,14 +53,18 @@ class EventManager {
     }
 
     remove(subscriber) {
-        for (const key in this.listeners) {
-            if (this.listeners[key][0] === subscriber) {
-                delete this.listeners[key];
-            }
+        for (const key in this.publishers) {
+            this.publishers[key] = this.publishers[key].filter((x) => {
+                return x[0] !== subscriber;
+            })
         }
+        log(`\/\/ remove ${subscriber} `.padEnd(stringLength, '='))
     }
 
     stringify() {
-
+        // 수정 필요
+        return JSON.stringify(this.publishers);
     }
 }
+
+module.exports = { EventManager }
