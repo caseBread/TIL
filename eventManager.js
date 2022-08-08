@@ -3,24 +3,25 @@ const { objectMap } = require("./util");
 const log = console.log;
 const stringLength = 80;
 class EventManager {
+    static instance = null;
     constructor() {
-        this.sharedInstance();
+        this.subscribers = {};
     }
 
-    sharedInstance() {
-        if (!this.publishers) {
-            this.publishers = {};
+    static sharedInstance() {
+        if (this.instance === null) {
+            this.instance = new EventManager();
         }
-        return this.publishers;
+        return this.instance;
     }
 
     add(subscriber, event, sender, handler) {
         const key = [event,sender];
         const value = [subscriber, handler];
-        if (!this.publishers[key]) {
-            this.publishers[key] = [];
+        if (!this.subscribers[key]) {
+            this.subscribers[key] = [];
         }
-        this.publishers[key].push(value);
+        this.subscribers[key].push(value);
     }
 
     subscribeHandler(event) {
@@ -36,8 +37,8 @@ class EventManager {
 
         log(`\/\/ ${senderName} post "${eventName}" `.padEnd(stringLength, '='))
         keys.forEach((key,i) => {
-            if (this.publishers[key]) {
-                this.publishers[key].forEach((publisher,i) => {
+            if (this.subscribers[key]) {
+                this.subscribers[key].forEach((publisher,i) => {
                     log(`${publisher[0]}: ${eventName} event from ${senderName} userData = ${userDataName}`);
                 })
                 
@@ -53,8 +54,8 @@ class EventManager {
     }
 
     remove(subscriber) {
-        for (const key in this.publishers) {
-            this.publishers[key] = this.publishers[key].filter((x) => {
+        for (const key in this.subscribers) {
+            this.subscribers[key] = this.subscribers[key].filter((x) => {
                 return x[0] !== subscriber;
             })
         }
@@ -63,7 +64,7 @@ class EventManager {
 
     stringify() {
         // 수정 필요
-        return JSON.stringify(this.publishers);
+        return JSON.stringify(this.subscribers);
     }
 }
 

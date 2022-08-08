@@ -1,0 +1,23 @@
+{
+  "name": "day16",
+  "version": "1.0.0",
+  "description": "줄간격 맞추는 method",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/186c0cf01e70513a9548af24435b5140.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/186c0cf01e70513a9548af24435b5140"
+  },
+  "homepage": "https://gist.github.com/186c0cf01e70513a9548af24435b5140",
+  "dependencies": {
+    "json-fn": "^1.1.1",
+    "jsonfn": "^0.31.0"
+  }
+}
