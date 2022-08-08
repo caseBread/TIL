@@ -1,7 +1,13 @@
 # 실행방법
-```
-node index
-```
+
+### 1번 미션 실행
+
+```node index```
+
+### 2번 미션 실행
+
+```node scenario```
+
 # 체크포인트
 
 - [x] EventManager 싱글톤 인스턴스 구현
