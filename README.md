@@ -1,5 +1,7 @@
 # 실행방법
-
+```
+node index
+```
 # 체크포인트
 
 - [x] EventManager 싱글톤 인스턴스 구현
@@ -12,17 +14,17 @@
 
 - [x] Worker Thread 동작 분리
 
-- [ ] 조건별 매칭한 subscriber 핸들러 동작
+- [x] 조건별 매칭한 subscriber 핸들러 동작
 
-- [ ] 핸들러 내 completed flag 지원 여부
+- [x] 핸들러 내 completed flag 지원 여부
 
-- [ ] 구독 조건들 출력 함수 구현
+- [x] 구독 조건들 출력 함수 구현
 
-- [ ] 비동기 async방식 postEvent 동작 구현
+- [x] 비동기 async방식 postEvent 동작 구현
 
-- [ ] 지연 delay방식 postEvent 동작 구현
+- [x] 지연 delay방식 postEvent 동작 구현
 
-- [ ] Subscriber 핸들러 처리 Event Emitter 동작 구현
+- [x] Subscriber 핸들러 처리 Event Emitter 동작 구현
 
 # 학습메모
 

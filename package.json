@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://gist.github.com/186c0cf01e70513a9548af24435b5140"
   },
-  "homepage": "https://gist.github.com/186c0cf01e70513a9548af24435b5140",
-  "dependencies": {
-    "json-fn": "^1.1.1",
-    "jsonfn": "^0.31.0"
-  }
+  "homepage": "https://gist.github.com/186c0cf01e70513a9548af24435b5140"
 }
