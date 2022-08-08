@@ -1,3 +1,6 @@
+const { Event } = require("./event");
+const log = console.log;
+
 class EventManager {
     constructor() {
         this.initialize();
@@ -16,12 +19,38 @@ class EventManager {
         this.listeners[key].push(value);
     }
 
-    postEvent() {
-        
+    printEvent(subscriber, eventName, sender, userData) {
+        log(`${subscriber}: ${eventName} event from ${sender} userData = ${userData}`);
     }
 
-    remove() {
+    subscribeHandler(event) {
+        const eventName = event.getName();
+        const senderName = event.getSender();
+        const keys = [
+            [ eventName, senderName ],
+            [ "", senderName ],
+            [ eventName, undefined ],
+            [ "", undefined ],
+        ]
+        keys.forEach((key,i) => {
+            if (this.listeners[key]) {
+                this.printEvent(this.listeners[key][0], eventName, senderName, this.listeners[key][1]);
 
+            }
+        })
+    }
+
+    postEvent(name, sender, userData) {
+        const event = new Event(name, sender, userData);
+        this.subscribeHandler(event);
+    }
+
+    remove(subscriber) {
+        for (const key in this.listeners) {
+            if (this.listeners[key][0] === subscriber) {
+                delete this.listeners[key];
+            }
+        }
     }
 
     stringify() {
