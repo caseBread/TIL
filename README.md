@@ -26,6 +26,21 @@ node index
 
 - [x] Subscriber 핸들러 처리 Event Emitter 동작 구현
 
+# test 결과
+
+### EventManager method test
+
+* main 함수 작성
+![](https://postfiles.pstatic.net/MjAyMjA4MDlfMjk4/MDAxNjU5OTgxMTQ3NTY5.yhZyCZPb_UectgugEeqL7lVyuwA1CkUek4rfnnzKiDog.VxBJqAENomkQG-317Ykg6_ars9iyXHaioDsgV3_Dxgog.PNG.kgu0515/image.png?type=w773)
+
+* 출력 결과
+![](https://postfiles.pstatic.net/MjAyMjA4MDlfNyAg/MDAxNjU5OTgwOTk3NDc5.hX2yPQ8j-TP3TgeWCiK9PkglROjPPF8Z_bhkLWcY2gEg.pJ_WLpD_3ipiL0fb37Oh6KJmnq80iLSetaNGRep_a8og.PNG.kgu0515/image.png?type=w773)
+
+### 데이터구조
+![](https://postfiles.pstatic.net/MjAyMjA4MDlfMjQx/MDAxNjU5OTgzNDc3NjE1.f8DExz_acUj6K3_ehwoSdC_DnrbAR2ZCSy9b-M-hsmgg.OfjEva7QacDeuOr4EWTa0e7s8iNn43IGH4VlT-SSJkog.PNG.kgu0515/SE-ac648c57-fae0-40dd-ac14-529a32477251.png?type=w773)
+
+
+
 # 학습메모
 
 

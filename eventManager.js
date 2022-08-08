@@ -41,7 +41,7 @@ class EventManager {
 
     postEvent_delay(event, keys, completed, delayTime) {
         if (completed) return;
-        log(`\/\/ ${event.getSender()} post "${event.getName()}" by delay`.padEnd(stringLength, '='))
+        log(`\/\/ ${event.getSender()} post "${event.getName()}" by ${delayTime}ms delay`.padEnd(stringLength, '='))
         keys.forEach((key,i) => {
             if (this.subscribers[key]) {
                 completed = new Promise((resolve,reject) => {
@@ -100,18 +100,25 @@ class EventManager {
         }
     }
 
-    remove(subscriber) {
+    async remove(subscriber) {
         for (const key in this.subscribers) {
-            this.subscribers[key] = this.subscribers[key].filter((x) => {
+            this.subscribers[key] = await this.subscribers[key].filter((x) => {
                 return x[0] !== subscriber;
             })
+            if (this.subscribers[key].length === 0) {
+                delete this.subscribers[key]
+            }
         }
         log(`\/\/ remove ${subscriber} `.padEnd(stringLength, '='))
     }
 
     stringify() {
-        // 수정 필요
-        return JSON.stringify(this.subscribers);
+        log(`// subscribers data `.padEnd(stringLength,"="))
+        for (const subscriber in this.subscribers) {
+            let [event, sender] = subscriber.split(",")
+            if (sender === "") sender = undefined
+            log(`// ${this.subscribers[subscriber][0][0]} : event name = "${event}", sender name = ${sender}`)
+        }
     }
 }
 

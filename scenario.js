@@ -1,37 +1,9 @@
 const { EventManager } = require("./eventManager");
-const { Worker, isMainThread, parentPort } = require("worker_threads");
 const log = console.log;
 
 
-const CreateInstance = EventManager.sharedInstance();
 
 const main = async () => {
-    const event = EventManager.sharedInstance();
-    event.stringify();
-    log();
-    
-    event.postEvent("ModelDataChanged", "albumModel", {"data":"abc"});
-    log();
-    event.postEvent("ViewUpdated", "albumView", {"view":"abc"});
-    log();
-    event.postEvent("DidShakeMotion", "albumController", {"from":"blue"});
-    log();
-    event.postEvent("AllDataChanged", "dummy", {});
-    log();
-    await event.remove("subscriberD");
-    event.postEvent("AllDataChanged", "dummy", {});
-    log();
-
-    
-}
-
-const worker = () => {
-    const event = EventManager.sharedInstance();
-    event.postEvent("DidShakeMotion", "albumController", {"from": "blue"})
-    event.postEvent("AllDataChanged", "dummy", {})
-}
-
-(() => {
     const event = EventManager.sharedInstance();
 
     event.add("subscriberA","ModelDataChanged", "albumModel", (publishedEvent) => {
@@ -56,18 +28,29 @@ const worker = () => {
         return flag = true;
     })
 
-    if (isMainThread) {
-        const workerThread = new Worker(__filename);
-        main();
-    } else {
-        worker();
-    }
-})()
+    // sync
+    event.postEvent("ModelDataChanged", "albumModel", {"data":"abc"});
+    log();
 
+    // delay
+    event.postEvent("ViewUpdated", "albumView", {"view": "xxx"}, false, 3000);
+    log();
 
+    // async
+    event.postEvent("AllDataChanged", "dummy", {}, false);
+    log();
 
+    // remove
+    await event.remove("subscriberD");
 
+    // async
+    event.postEvent("AllDataChanged", "dummy", {}, false);
+    log();
 
+    // async && completed flag = true
+    event.postEvent("AllDataChanged", "dummy", {}, true);
+    log();
 
+}
 
-
+main();
