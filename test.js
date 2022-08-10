@@ -7,7 +7,6 @@ const { insertInto } = require("./insert");
 const { reportTable } = require("./report");
 const { selectFrom } = require("./select");
 const { update } = require("./update");
-const { log } = require("./util");
 
 // 테스트
 createTable(`CREATE TABLE billboard (singer String, year Numeric, song String)`);

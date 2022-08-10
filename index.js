@@ -10,19 +10,6 @@ const { update } = require("./update");
 const readlineSync = require("readline-sync");
 const { log } = require("./util");
 
-// drop 제외 테스트
-// createTable(`CREATE TABLE billboard (singer String, year Numeric, song String)`);
-// insertInto(`INSERT INTO billboard (singer, year, song) VALUES ("BTS", 2020, "Dynamite")`);
-// deleteFrom(`DELETE FROM billboard WHERE id = 1`)
-// update(`UPDATE billboard SET song = "Butter" WHERE id = 1`);
-// insertInto(`INSERT INTO billboard (singer, year, song) VALUES ("BTS", 2020, "Dynamite")`)
-// selectFrom(`SELECT FROM billboard WHERE singer="BTS"`)
-// reportTable(`REPORT TABLE billboard`)
-// exportTo(`EXPORT TO y2021song FROM billboard WHERE year = 2020`)
-// importFrom(`IMPORT FROM y2021song TO billboard`)
-
-
-// dropTable(`DROP TABLE billboard`)
 const main = () => {
     log(`SQL 실행을 시작합니다.`)
     log(`종료를 원하시면 "quit"을 입력해주세요.`)
