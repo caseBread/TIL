@@ -8,13 +8,13 @@
 
 - [x] DELETE FROM 구현 및 출력
 
-- [ ] UPDATE 구현 및 출력
+- [x] UPDATE 구현 및 출력
 
-- [ ] SELECT FROM 구현 및 출력
+- [x] SELECT FROM 구현 및 출력
 
-- [ ] DROP TABLE 구현 및 출력
+- [x] DROP TABLE 구현 및 출력
 
-- [ ] REPORT TABLE 구현 및 출력
+- [x] REPORT TABLE 구현 및 출력
 
 - [ ] EXPORT 구현 및 출력
 
