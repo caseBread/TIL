@@ -1,4 +1,6 @@
-const { create } = require("./create");
+const { createTable } = require("./create");
+const { insertInto } = require("./insert");
 
-create(`CREATE TABLE billboard (singer String, year Numeric, song String)
-`);
+createTable(`CREATE TABLE billboard (singer String, year Numeric, song String)`);
+
+insertInto(`INSERT INTO billboard (singer, year, song) VALUES ("BTS", 2020, "Dynamite")`);

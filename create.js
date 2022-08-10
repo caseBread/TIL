@@ -2,7 +2,7 @@ const log = console.log;
 const fs = require("fs");
 
 
-const create = (str) => {
+const createTable = (str) => {
     const command = str.substr(0,12);
     const strByArray = (str.substr(13)).replace(/[\n(),]+/g,'').split(" ");
 
@@ -18,8 +18,9 @@ const create = (str) => {
         
     }
     const stringify = columns.join(",");
-    fs.writeFileSync("./"+tableName+".csv",stringify);
+    fs.writeFileSync("./"+tableName+".csv",stringify+'\n');
     
+    log(`CREATED ${tableName} TABLE (${columns})`);
 }
 
-module.exports = { create }
+module.exports = { createTable }
