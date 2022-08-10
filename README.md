@@ -6,7 +6,7 @@
 
 - [x] INSERT INTO 구현 및 출력
 
-- [ ] DELETE FROM 구현 및 출력
+- [x] DELETE FROM 구현 및 출력
 
 - [ ] UPDATE 구현 및 출력
 
