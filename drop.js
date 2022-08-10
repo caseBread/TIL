@@ -9,7 +9,7 @@ const dropTable = (str) => {
         log("해당하는 파일이 존재하지 않습니다.");
     }
 
-    log(`DROPPED ${tableName}`);
+    log(`DROPPED ${tableName} TABLE`);
 }
 
 module.exports = { dropTable }
