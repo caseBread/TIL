@@ -2,7 +2,7 @@ const { log } = require("console");
 const fs = require("fs");
 
 const dropTable = (str) => {
-    const tableName = str.split(" ")[2];
+    const [ tableName ] = str.split(/DROP\sTABLE\s/gi).slice(1);
     try {
         fs.unlinkSync(`./${tableName}.csv`);
     } catch (error) {

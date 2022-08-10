@@ -3,7 +3,7 @@ const { findEqual, findMore, findLess } = require("./select");
 const { CSVToArray, log } = require("./util");
 
 const exportTo = (str) => {
-    const [newTableName, oldTableName, condition ] = str.split(/EXPORT\sTO\s|\sFROM\s|\sWHERE\s/g).slice(1)
+    const [newTableName, oldTableName, condition ] = str.split(/EXPORT\sTO\s|\sFROM\s|\sWHERE\s/gi).slice(1);
     const [ attr, value ] = condition.split(/\s*=\s*/g);
     const sign = condition.match(/[>=<]/g)[0]
 
@@ -19,15 +19,13 @@ const exportTo = (str) => {
         resultArray = findLess(arrangedCSV, attr, value);
     }
 
-
-
     if (resultArray.length === 0) {
         log(`조건에 맞는 데이터가 존재하지 않습니다.`);
         return;
     } else {
         const stringify = (resultArray.length === 1)
-                    ? resultArray.join(",")
-                    : resultArray.reduce((pre, cur) => pre + "\r\n" + cur.join(","));
+                        ? resultArray.join(",")
+                        : resultArray.reduce((pre, cur) => pre + "\r\n" + cur.join(","));
 
         fs.writeFileSync(`./${newTableName}.csv`,stringify);
         log(`============= EXPORTED RESULT =============`);

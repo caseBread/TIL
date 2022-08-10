@@ -17,14 +17,18 @@ const findLess = (arrangedCSV, attr, value) => {
 }
 
 const selectFrom = (str) => {
-    const command = str.substr(0,11);
-    const [ tableName, WHERE, ...condition ] = str.substr(12).split(" ");
+    if(!/\sFROM\s/gi.test(str)) {
+        throw new Error(`UPDATE command must contain 'FROM'`);
+    } else if(!/\sWHERE\s/gi.test(str)) {
+        throw new Error(`UPDATE command must contain 'WHERE'`);
+    }
+    
+    const [ tableName, condition ] = str.split(/SELECT\sFROM\s|\sWHERE\s/gi).slice(1);
 
-    const conditionToString = condition.join("").replace(/["']/g,'')
-    const sign = conditionToString.match(/[>=<]/g)[0]
-    const indexOfSign = conditionToString.indexOf(sign);
-    const attr = conditionToString.substring(0,indexOfSign);
-    const value = conditionToString.substring(indexOfSign+1);
+    const sign = condition.match(/[>=<]/g)[0]
+    const indexOfSign = condition.indexOf(sign);
+    const attr = condition.substring(0,indexOfSign);
+    const value = condition.substring(indexOfSign+1).replace(/["']/g, ``);
 
     const CSV = fs.readFileSync(`./${tableName}.csv`, `utf8`);
     const arrangedCSV = CSVToArray(CSV, ",")
@@ -51,4 +55,4 @@ const selectFrom = (str) => {
     }
 }
 
-module.exports = { selectFrom }
+module.exports = { selectFrom, findEqual, findMore, findLess }

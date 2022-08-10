@@ -2,7 +2,7 @@ const fs = require("fs");
 const { log, CSVToArray } = require("./util");
 
 const reportTable = (str) => {
-    const tableName = str.split(" ")[2];
+    const [ tableName ] = str.split(/REPORT\sTABLE\s/gi).slice(1)
 
     const CSV = fs.readFileSync(`./${tableName}.csv`, `utf8`);
     const arrangedCSV = CSVToArray(CSV, ",");

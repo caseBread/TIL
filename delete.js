@@ -1,37 +1,45 @@
-const log = console.log;
+const { log } = require("console");
 const fs = require("fs");
 const { CSVToArray } = require("./util");
 
 const deleteFrom = (str) => {
-    const command = str.substr(0,10);
-    const [ tableName, ...strByArray ] = str.substr(11).match(/([^\s(),])+/g);
-    if(!/WHERE/gi.test(strByArray.join(''))) {
+    if(!/\sWHERE\s/gi.test(str)) {
         throw new Error(`DELETE command must contain 'WHERE'`);
-    } 
+    }
 
-    const indexOfEqual = strByArray.indexOf("=")
-    const [ attr, value ] = [ strByArray[indexOfEqual-1], strByArray[indexOfEqual+1] ]
+    const [ tableName, condition ] = str.split(/DELETE\sFROM\s|\sWHERE\s/gi).slice(1);
+    
+    const [ attr, value ] = condition.split(/\s*=\s*/g);
 
     const CSV = fs.readFileSync(`./${tableName}.csv`, `utf8`);
     const arrangedCSV = CSVToArray(CSV, ",")
 
+
+    /**
+     * 해당 속성이 없는 경우
+     */
     if (!arrangedCSV[0].includes(attr)) {
-        throw new Error(`조건에 맞는 데이터가 존재하지 않습니다.`);
+        log(`조건에 맞는 데이터가 존재하지 않습니다.`);
+        return;
     }
 
     const indexOfAttr = arrangedCSV[0].indexOf(attr)
-    const newArray = arrangedCSV.filter((x) => {
-        return x[indexOfAttr] !== value;
-    })
 
     const deletedArray = arrangedCSV.filter((x) => {
         return x[indexOfAttr] === value;
     })
 
-    // let stringify = ''
-    // newArray.forEach((x,i) => {
-    //     stringify += x.join(",") + "\n";
-    // })
+    /**
+     * 해당 속성값이 없는 경우
+     */
+    if (deletedArray.length === 0) {
+        log(`조건에 맞는 데이터가 존재하지 않습니다.`);
+        return;
+    }
+
+    const newArray = arrangedCSV.filter((x) => {
+        return x[indexOfAttr] !== value;
+    })
     
     const stringify = (newArray.length === 1)
                     ? newArray.join(",")

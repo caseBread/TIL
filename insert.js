@@ -1,36 +1,28 @@
-const { CSVToArray } = require("./util");
+const { CSVToArray, log } = require("./util");
 const fs = require("fs");
-const log = console.log;
-
-
 
 const insertInto = (str) => {
-    const command = str.substr(0,10);
-    const [ tableName, ...strByArray ] = str.substr(11).match(/([^\s(),])+/g);
+
+    if (!/\sVALUES\s/gi.test(str)) {
+        throw new Error("INSERT command must contain 'VALUES'")
+    }
+
+    //정규표현식 수정 필요 
+    const [ tableName, columns, values ] = str.split(/INSERT\sINTO\s|\s\(|\sVALUES\s/gi).slice(1);
 
     const CSV = fs.readFileSync(`./${tableName}.csv`, `utf8`);
-    
-    const arrangedCSV = CSVToArray(CSV, ",")
-    const numberOfColumns = arrangedCSV[0].length;
-    const numberOfLows = arrangedCSV.length;
+    const arrangedCSV = CSVToArray(CSV, ",");
 
-    if (strByArray.indexOf(`VALUES`) === -1) {
-        throw new Error("INSERT statement must contain 'VALUES'")
+    if (columns.match(/\w+/g).filter((x) => !arrangedCSV[0].includes(x)).length !== 0) {
+        log(`${tableName}에 포함되지 않는 attribute를 입력받았습니다.`)
     }
 
-    /**
-     * numberOfColumns : include 'id' column
-     * numberOfColumns - 1 : exclude 'id' column
-     */
-    if (numberOfColumns - 1 !== strByArray.indexOf("VALUES")) {
-        throw new Error("The number of columns does not match.")
-    }
 
-    const newId = numberOfLows - 1;
-    const newRecord = [ newId, ...strByArray.slice(strByArray.indexOf("VALUES") + 1) ]
-    const stringify = newRecord.join(",");
+    const newId = arrangedCSV.length;
+    const newRecord = [ newId, ...values.match(/\w+\s?\w*/g) ]
+    const stringify = '\r\n'+newRecord.join(",");
 
-    fs.appendFileSync(`./${tableName}.csv`, stringify+'\n');
+    fs.appendFileSync(`./${tableName}.csv`,stringify);
     
     log(`INSERTED (${newRecord})`);
 }
