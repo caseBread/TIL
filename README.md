@@ -16,7 +16,7 @@
 
 - [x] REPORT TABLE 구현 및 출력
 
-- [ ] EXPORT 구현 및 출력
+- [x] EXPORT 구현 및 출력
 
 - [ ] IMPORT 구현 및 출력
 
