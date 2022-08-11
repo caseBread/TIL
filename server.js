@@ -2,43 +2,44 @@ const log = console.log;
 const net = require('net'); // 여기에 on에 대한 emit이 다 있고
 const { checkIn } = require('./checkin');
 const { checkOut } = require('./checkout');
+const { message } = require('./message');
 const { mission } = require('./mission');
+const { peerSession } = require('./peersession');
+const { attendance } = require('./serverData');
 const { stringToArray } = require('./util');
 // 
 
 const portNumber = 2022;
 
-let message = "";
-let status = "";
-let newClientId = 1;
 const server = net.createServer(function(socket){
-    socket.clientId = newClientId++;
 	log(`${socket.address().address}:${socket.address().port} / clientId = ${socket.clientId} connected.`);
     
 	socket.on('data', function(data){
-        const message = data.toString('utf8').replace("\r\n","");
+        const chunk = data.toString('utf8').replace("\r\n","");
         /**
          * 명령어 인식 공간
          */
         
-        const command = stringToArray(message);
+        const command = stringToArray(chunk);
         let returnMessage;
         
         switch (command[0]) {
             case "checkin" :
-                returnMessage = checkIn(command[1], socket.clientId);
+                returnMessage = checkIn(command[1], socket);
+                socket.write(`${returnMessage}\r\n`);   
                 break;
             case "mission" :
                 returnMessage = mission(command[1]);
+                socket.write(`${returnMessage}\r\n`);   
                 break;
             case "peersession" :
-
+                peerSession(command[1], socket);
                 break;
             case "complete" :
 
                 break;
             case "message" :
-
+                message(command.slice(1).join(" "), socket);
                 break;
             case "direct" :
 
@@ -50,10 +51,10 @@ const server = net.createServer(function(socket){
             default :
                 returnMessage = "잘못된 명령어 입니다. 다시 한번 확인해주세요."
         }
-        socket.write(`${returnMessage}\r\n`);         
+              
     
-        log(`<< ${JSON.stringify(message)}`);
-        //socket.write(`>> ${JSON.stringify(message)}\r\n`); 캠퍼에게 다시 메시지보낼이유 엄슴
+        log(`<< ${JSON.stringify(chunk)}`);
+        //socket.write(`>> ${JSON.stringify(chunk)}\r\n`); 캠퍼에게 다시 메시지보낼이유 엄슴
 	});
 
 	socket.on('close', function(){

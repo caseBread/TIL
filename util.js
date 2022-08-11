@@ -1,9 +1,19 @@
+const { group } = require("./serverData");
+
 const stringToArray = (message) => {
     return message.split(" ");
 }
 
-function getKeyByValue(object, value) {
+const getKeyByValue = (object, value) => {
     return Object.keys(object).find(key => object[key] === value);
 }
 
-module.exports = { stringToArray, getKeyByValue }
+const getGroupIndexById = (id) => {
+    let result = null;
+    group.forEach((x,i) => {
+        if (x.includes(id)) result = i;
+    });
+    return result;
+}
+
+module.exports = { stringToArray, getKeyByValue, getGroupIndexById }

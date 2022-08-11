@@ -1,5 +1,5 @@
 const attendance = {}; // 객체로 바꿀것
-const group = Array.from(Array(97), () => new Array());
+const group = Array.from(Array(97), () => new Array()); // campId가 저장됨
 let nowGroupNumber = 1;
 
 const missionKeyword = {

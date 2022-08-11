@@ -1,6 +1,8 @@
-const { attendance, group, nowGroupNumber } = require("./clientData");
+const { attendance, group, nowGroupNumber } = require("./serverData");
+let newClientId = 1;
 
-const checkIn = (campId, clientId) => {
+const checkIn = (campId, socket) => {
+
     const campIdNum = Number(campId.substr(1));
     if (campIdNum < 1 || 384 < campIdNum) {
         return "잘못된 ID를 입력하였습니다. ID범위 : (J001 ~ J384)";
@@ -11,10 +13,10 @@ const checkIn = (campId, clientId) => {
     }
 
     /**
-     * 입력한 campId와 clientId를 매칭
+     * 입력한 campId와 socket을 매칭
      */
-    attendance[campId] = clientId;
-
+    attendance[campId] = socket;
+    socket.clientId = campId; // socket에도 campId 저장 => peersession에서 활용
     if (4 <= group[nowGroupNumber].length) {
         nowGroupNumber++;
     }

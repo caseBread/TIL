@@ -1,4 +1,4 @@
-const { attendance, group } = require("./clientData");
+const { attendance, group } = require("./serverData");
 const { getKeyByValue } = require("./util");
 
 const checkOut = (clientId) => {
