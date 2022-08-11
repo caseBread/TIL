@@ -1,5 +1,7 @@
 const log = console.log;
 
+const AttributeType = [ "Numeric", "numeric", "Number", "number", "String", "string" ];
+
 function CSVToArray( strData, strDelimiter ){
     // Check to see if the delimiter is defined. If not,
     // then default to comma.
@@ -84,4 +86,4 @@ function CSVToArray( strData, strDelimiter ){
 }
 
 
-module.exports = { CSVToArray, log }
+module.exports = { CSVToArray, AttributeType, log }

@@ -1,6 +1,6 @@
 const fs = require("fs");
-const { log } = require("./util");
-const AttributeType = [ "Numeric", "numeric", "Number", "number", "String", "string" ];
+const { log, AttributeType } = require("./util");
+
 
 const createTable = (str) => {
 
