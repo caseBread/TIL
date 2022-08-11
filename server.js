@@ -59,14 +59,10 @@ const server = net.createServer(function (socket) {
         complete(json, socket.clientId);
         break;
       case "message":
-        message(json, socket);
+        message(json, socket.clientId);
         break;
       case "direct":
-        json["body"] = direct(
-          socket.clientId,
-          json.message.to,
-          json.message.text
-        );
+        direct(json, socket.clientId);
         socket.write(`${returnMessage}\r\n`);
         break;
       case "checkout":
