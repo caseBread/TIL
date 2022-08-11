@@ -19,17 +19,26 @@ const peerSession = (json, clientId) => {
    * 주의할점 : 입력받은 socket이 아닌 attendance에 있는 socket에 저장
    */
   const groupIndex = getGroupIndexById(clientId);
+  const newjson = { header: {} };
+  newjson["header"]["from"] = clientId;
+  newjson["header"]["status"] = 200;
+  newjson["body"] = `${prefix(
+    `server`
+  )} 피어세션이 시작되었습니다.(maxCount=${maxCount})\r\n`;
   group[groupIndex].forEach((x, i) => {
     attendance[x].possibleMessage = maxCount;
-    attendance[x].write(
-      `${prefix(`server`)} 피어세션이 시작되었습니다.(maxCount=${maxCount})\r\n`
-    );
+    attendance[x].write(JSON.stringify(newjson));
   });
 
   /**
    * 명령어 보낸 client가 group Leader가 됨 => complete에서 활용
    */
   attendance[clientId].groupLeader = true;
+
+  /**
+   * body없이 response 생성
+   */
+  json["header"]["status"] = 201;
 };
 
 module.exports = { peerSession };

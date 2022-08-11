@@ -2,8 +2,8 @@ const { attendance } = require("./serverData");
 const { prefix } = require("./util");
 
 const direct = (json, clientId) => {
-  const receiverId = json.msg.to;
-  const sendMessage = json.msg.text;
+  const receiverId = json.header.msg.to;
+  const sendMessage = json.header.msg.text;
   /**
    * 옳바른 client?
    */
@@ -35,7 +35,7 @@ const direct = (json, clientId) => {
   /**
    * send direct message
    */
-  const newjson = {};
+  const newjson = { header: {} };
   newjson["header"]["status"] = 200;
   newjson["header"]["from"] = clientId;
   newjson["body"] = `${prefix(`${clientId}(direct)`)} ${sendMessage}\r\n`;

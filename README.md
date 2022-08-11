@@ -67,3 +67,9 @@
 - [ ] direct 요청 campId, text 전송
 
 # 학습메모
+
+- json 구조 설명
+
+- json encoding decoding 과정 설명
+
+-

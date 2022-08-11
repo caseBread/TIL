@@ -31,10 +31,12 @@ const incoding = (line) => {
       break;
     case "message":
       result["header"]["command"] = "message";
+      result["header"]["msg"] = {};
       result["header"]["msg"]["text"] = command.slice(1).join(" ");
       break;
     case "direct":
       result["header"]["command"] = "direct";
+      result["header"]["msg"] = {};
       result["header"]["msg"]["to"] = command[1];
       result["header"]["msg"]["text"] = command.slice(2).join(" ");
       break;
@@ -72,8 +74,11 @@ socket.on("connect", function () {
   });
 });
 
-socket.on("data", function (chunk) {
-  log(`recv : ${chunk}`);
+socket.on("data", function (data) {
+  const chunk = data.toString("utf8");
+  const json = JSON.parse(chunk);
+  if ("body" in json) process.stdout.write(json["body"]);
+  if (json.header.closed) socket.end();
 });
 
 socket.on("end", function () {

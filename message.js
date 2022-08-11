@@ -1,9 +1,10 @@
 const net = require("net");
 const { group, attendance } = require("./serverData");
-const { getGroupIndexById } = require("./util");
+const { getGroupIndexById, prefix } = require("./util");
 
 // 아예 socket.clientId만 받도록 수정
 const message = (json, clientId) => {
+  const sendMessage = json.header.msg.text;
   /**
    * 가능한 메시지 횟수를 다 소모하였거나 피어세션을 시작하지 않은 경우
    *
@@ -21,13 +22,13 @@ const message = (json, clientId) => {
    * 그룹원들에게 메시지 보내기
    */
   const groupIndex = getGroupIndexById(clientId);
+  const newjson = { header: {} };
+  newjson["header"]["from"] = clientId;
+  newjson["header"]["status"] = 200;
+  newjson["body"] = `${prefix(`${clientId}(group)`)} ${sendMessage}\r\n`;
   group[groupIndex]
     .filter((x) => x !== clientId)
     .forEach((x, i) => {
-      const newjson = {};
-      newjson["header"]["from"] = clientId;
-      newjson["header"]["status"] = 200;
-      newjson["body"] = `${prefix(`${clientId}(group)`)} ${sendMessage}\r\n`;
       attendance[x].write(JSON.stringify(newjson));
     });
 

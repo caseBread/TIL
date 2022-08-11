@@ -65,7 +65,7 @@ const server = net.createServer(function (socket) {
         direct(json, socket.clientId);
         break;
       case "checkout":
-        socket.end();
+        checkOut(json, socket.clientId);
         break;
       case "help":
         break;
@@ -76,12 +76,10 @@ const server = net.createServer(function (socket) {
   });
 
   socket.on("close", function () {
-    checkOut(socket.clientId);
-    socket.write(JSON.stringify(json));
     log("client disconnted.");
   });
 
-  socket.write(`welcome to BoostCamp\r\n`);
+  //socket.write(`welcome to BoostCamp\r\n`); // 이거 보내면 에러뜸 json형태로 보내야함
 });
 
 server.on("error", function (err) {
