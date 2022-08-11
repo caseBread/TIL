@@ -20,4 +20,14 @@ const prefix = (sender) => {
   return `>> ${sender} :`;
 };
 
-module.exports = { stringToArray, getKeyByValue, getGroupIndexById, prefix };
+const serverPrefix = (sender) => {
+  return `<< ${sender} :`;
+};
+
+module.exports = {
+  stringToArray,
+  getKeyByValue,
+  getGroupIndexById,
+  prefix,
+  serverPrefix,
+};

@@ -25,7 +25,7 @@ const message = (sendMessage, socket) => {
   group[groupIndex]
     .filter((x) => x !== clientId)
     .forEach((x, i) => {
-      attendance[x].write(`>> ${clientId}(group) : ${sendMessage}\r\n`);
+      attendance[x].write(`${prefix(`${clientId}(group)`)} ${sendMessage}\r\n`);
     });
 
   /**

@@ -9,7 +9,6 @@ const { mission } = require("./mission");
 const { peerSession } = require("./peersession");
 const { attendance } = require("./serverData");
 const { stringToArray } = require("./util");
-//
 
 const portNumber = 2022;
 
@@ -17,6 +16,19 @@ const server = net.createServer(function (socket) {
   log(`${socket.address().address}:${socket.address().port} connected.`);
 
   socket.on("data", function (data) {
+    /**
+     * 명령을
+     * json형태로 한다.
+     * 클라이언트에서 입력하면
+     * 그것을 json으로 incoding
+     * server에서는 json을 decoding
+     *
+     * json 형태는
+     * "command":"checkin"
+     * "campId":"J021"
+     * ""
+     */
+
     const chunk = data.toString("utf8").replace("\r\n", "");
     /**
      * 명령어 인식 공간
@@ -60,10 +72,10 @@ const server = net.createServer(function (socket) {
         break;
       default:
         returnMessage = "잘못된 명령어 입니다. 다시 한번 확인해주세요.";
+        socket.write(`${checkOut(socket.clientId)}\r\n`);
     }
 
     log(`<< ${JSON.stringify(chunk)}`);
-    //socket.write(`>> ${JSON.stringify(chunk)}\r\n`); 캠퍼에게 다시 메시지보낼이유 엄슴
   });
 
   socket.on("close", function () {
