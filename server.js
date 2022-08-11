@@ -63,11 +63,8 @@ const server = net.createServer(function (socket) {
         break;
       case "direct":
         direct(json, socket.clientId);
-        socket.write(`${returnMessage}\r\n`);
         break;
       case "checkout":
-        json["body"] = checkOut(socket.clientId);
-        socket.write(`${returnMessage}\r\n`);
         socket.end();
         break;
       case "help":
@@ -79,7 +76,8 @@ const server = net.createServer(function (socket) {
   });
 
   socket.on("close", function () {
-    checkOut(socket.clientId); // 최적화 필요. 일단 나가면 checkout한번 더하는방식임
+    checkOut(socket.clientId);
+    socket.write(JSON.stringify(json));
     log("client disconnted.");
   });
 

@@ -20,7 +20,7 @@ const checkOut = (json, clientId) => {
     .filter((x) => x !== clientId)
     .forEach((x, i) => {
       const newjson = {};
-      newjson["header"]["from"] = "server";
+      newjson["header"]["from"] = clientId;
       newjson["header"]["status"] = 200;
       newjson["body"] = `${prefix(
         `server`
