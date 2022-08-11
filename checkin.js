@@ -4,22 +4,27 @@ const { prefix } = require("./util");
 let newClientId = 1;
 
 /**
- * 동일 소켓이 여러 checkin 가능한 오류 존재
  *
- * @param {String} campId
- * @param {Object} socket
- * @returns String
+ * @param {Object} json
+ * @param {*} socket
+ * @returns
  */
-const checkIn = (campId, socket) => {
+const checkIn = (json, socket) => {
+  const campId = json.header.campId;
+  const date = json.header.date;
   const campIdNum = Number(campId.substr(1));
   if (campIdNum < 1 || 384 < campIdNum) {
-    return `${prefix(
+    json["header"]["status"] = 400;
+    json["body"] = `${prefix(
       `server`
-    )} 잘못된 ID를 입력하였습니다. ID범위 : (J001 ~ J384)`;
+    )} 잘못된 ID를 입력하였습니다. ID범위 : (J001 ~ J384)\r\n`;
+    return;
   }
 
   if (attendance[campId]) {
-    return `${prefix(`server`)} 이미 출석하였습니다.`;
+    json["header"]["status"] = 400;
+    json["body"] = `${prefix(`server`)} 이미 출석하였습니다.\r\n`;
+    return;
   }
 
   /**
@@ -39,9 +44,13 @@ const checkIn = (campId, socket) => {
   /**
    *  checkin 성공한 시각 저장 => server 출력시 활용
    */
-  checkinTime[campId] = new Date();
+  checkinTime[campId] = date;
 
-  return `${prefix(`server`)} ${campId} checkin완료 그룹번호:${nowGroupNumber}`;
+  json["header"]["status"] = 200;
+  json["body"] = `${prefix(
+    `server`
+  )} ${campId} checkin완료 그룹번호:${nowGroupNumber}\r\n`;
+  return;
 };
 
 module.exports = { checkIn };

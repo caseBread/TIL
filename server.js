@@ -14,8 +14,10 @@ const portNumber = 2022;
 
 const server = net.createServer(function (socket) {
   log(`${socket.address().address}:${socket.address().port} connected.`);
-
   socket.on("data", function (data) {
+    const chunk = data.toString("utf8");
+    const json = JSON.parse(chunk);
+    //log(json);
     /**
      * 명령을
      * json형태로 한다.
@@ -29,53 +31,47 @@ const server = net.createServer(function (socket) {
      * ""
      */
 
-    const chunk = data.toString("utf8").replace("\r\n", "");
-    /**
-     * 명령어 인식 공간
-     */
+    // /**
+    //  * 명령어 인식 공간
+    //  */
 
-    const command = stringToArray(chunk);
-    let returnMessage;
-
-    switch (command[0]) {
+    switch (json.header.command) {
       case "checkin":
-        returnMessage = checkIn(command[1], socket);
-        socket.write(`${returnMessage}\r\n`);
+        checkIn(json, socket);
+        socket.write(JSON.stringify(json));
         break;
       case "mission":
-        returnMessage = mission(command[1]);
-        socket.write(`${returnMessage}\r\n`);
+        mission(json);
+        socket.write(JSON.stringify(json));
         break;
       case "peersession":
-        peerSession(command[1], socket.clientId);
+        peerSession(json.header.maxCount, socket.clientId); // checkin 거치면 socket에 clientId생성됨.
+        socket.write(JSON.stringify(json));
         break;
       case "complete":
-        returnMessage = complete(socket.clientId);
+        json["body"] = complete(socket.clientId);
         socket.write(`${returnMessage}\r\n`);
         break;
       case "message":
-        message(command.slice(1).join(" "), socket);
+        message(json.message.text, socket);
         break;
       case "direct":
-        returnMessage = direct(
+        json["body"] = direct(
           socket.clientId,
-          command[1],
-          command.slice(2).join(" ")
+          json.message.to,
+          json.message.text
         );
         socket.write(`${returnMessage}\r\n`);
         break;
       case "checkout":
-        socket.write(`${checkOut(socket.clientId)}\r\n`);
+        json["body"] = checkOut(socket.clientId);
+        socket.write(`${returnMessage}\r\n`);
         socket.end();
         break;
       case "help":
         break;
       default:
-        returnMessage = "잘못된 명령어 입니다. 다시 한번 확인해주세요.";
-        socket.write(`${checkOut(socket.clientId)}\r\n`);
     }
-
-    log(`<< ${JSON.stringify(chunk)}`);
   });
 
   socket.on("close", function () {
