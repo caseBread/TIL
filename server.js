@@ -72,6 +72,7 @@ const server = net.createServer(function (socket) {
       default:
     }
 
+    json["header"]["date"] = new Date();
     socket.write(JSON.stringify(json));
   });
 
