@@ -2,12 +2,15 @@ const { attendance, group } = require("./serverData");
 const net = require("net");
 const { getGroupIndexById, prefix } = require("./util");
 
-const peerSession = (maxCount, clientId) => {
+const peerSession = (json, clientId) => {
+  const maxCount = json.header.maxCount;
   /**
    * 명령어를 보낸 client가 checkin 을 안한 경우
    */
   if (clientId === undefined) {
-    return `${prefix(`server`)} 먼저 checkin을 진행해주세요.`;
+    json["header"]["status"] = 400;
+    json["body"] = `${prefix(`server`)} 먼저 checkin을 진행해주세요.\r\n`;
+    return;
   }
 
   /**

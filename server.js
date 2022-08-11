@@ -15,8 +15,18 @@ const portNumber = 2022;
 const server = net.createServer(function (socket) {
   log(`${socket.address().address}:${socket.address().port} connected.`);
   socket.on("data", function (data) {
+    /**
+     * decoding
+     * return json
+     */
     const chunk = data.toString("utf8");
     const json = JSON.parse(chunk);
+
+    /**
+     * from 설정
+     */
+    json["header"]["from"] = "server";
+
     //log(json);
     /**
      * 명령을
@@ -38,22 +48,18 @@ const server = net.createServer(function (socket) {
     switch (json.header.command) {
       case "checkin":
         checkIn(json, socket);
-        socket.write(JSON.stringify(json));
         break;
       case "mission":
         mission(json);
-        socket.write(JSON.stringify(json));
         break;
       case "peersession":
-        peerSession(json.header.maxCount, socket.clientId); // checkin 거치면 socket에 clientId생성됨.
-        socket.write(JSON.stringify(json));
+        peerSession(json, socket.clientId); // checkin 거치면 socket에 clientId생성됨.
         break;
       case "complete":
-        json["body"] = complete(socket.clientId);
-        socket.write(`${returnMessage}\r\n`);
+        complete(json, socket.clientId);
         break;
       case "message":
-        message(json.message.text, socket);
+        message(json, socket);
         break;
       case "direct":
         json["body"] = direct(
@@ -72,6 +78,8 @@ const server = net.createServer(function (socket) {
         break;
       default:
     }
+
+    socket.write(JSON.stringify(json));
   });
 
   socket.on("close", function () {
