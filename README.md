@@ -50,21 +50,21 @@
 
 ### 챌린지 클라이언트 관련
 
-- [ ] 캠프아이디 입력 후 checkin 요청 campId 전송
+- [x] 캠프아이디 입력 후 checkin 요청 campId 전송
 
   - [x] 활동 시각 저장
 
-- [ ] checkout 전송후 연결 해재
+- [x] checkout 전송후 연결 해재
 
   - [x] 체크인부터 체크아웃까지 활동 시간 출력
 
-- [ ] peersession 요청 maxCount 전송
+- [x] peersession 요청 maxCount 전송
 
-- [ ] complete 요청 전송
+- [x] complete 요청 전송
 
-- [ ] message 요청 text 전송
+- [x] message 요청 text 전송
 
-- [ ] direct 요청 campId, text 전송
+- [x] direct 요청 campId, text 전송
 
 # 학습메모
 
@@ -72,4 +72,4 @@
 
 - json encoding decoding 과정 설명
 
--
+- request, response 구분 <- header.status 유무로 구분 가능

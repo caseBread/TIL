@@ -32,11 +32,12 @@ const checkOut = (json, clientId) => {
       attendance[x].write(JSON.stringify(newjson));
     });
 
-  log(`${prefix(`clientId`)} checkout 완료. (run time = ${runTime}ms)`);
+  log(`${prefix(`clientId`)} is checkout (success). (run time = ${runTime}ms)`);
 
   json["header"]["status"] = 200;
   json["header"]["closed"] = true;
   json["body"] = `${prefix(`server`)} checkout 완료.\r\n`;
+
   return;
 };
 

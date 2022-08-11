@@ -1,6 +1,7 @@
 const { attendance, group } = require("./serverData");
 const net = require("net");
 const { getGroupIndexById, prefix } = require("./util");
+const log = console.log;
 
 const peerSession = (json, clientId) => {
   const maxCount = json.header.maxCount;
@@ -10,6 +11,7 @@ const peerSession = (json, clientId) => {
   if (clientId === undefined) {
     json["header"]["status"] = 400;
     json["body"] = `${prefix(`server`)} 먼저 checkin을 진행해주세요.\r\n`;
+    log(`peersession : no checkin camper (failure)`);
     return;
   }
 
@@ -29,6 +31,7 @@ const peerSession = (json, clientId) => {
     attendance[x].possibleMessage = maxCount;
     attendance[x].write(JSON.stringify(newjson));
   });
+  log(`message to group#${groupIndex} => "${newjson["body"]}", from="server"`);
 
   /**
    * 명령어 보낸 client가 group Leader가 됨 => complete에서 활용
@@ -39,6 +42,8 @@ const peerSession = (json, clientId) => {
    * body없이 response 생성
    */
   json["header"]["status"] = 201;
+
+  log(`peersession from group#${groupIndex}(${clientId}) (success)`);
 };
 
 module.exports = { peerSession };

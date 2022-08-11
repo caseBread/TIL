@@ -3,11 +3,14 @@
 
 const { group, attendance } = require("./serverData");
 const { prefix, getGroupIndexById } = require("./util");
+const log = console.log;
 
 const complete = (json, clientId) => {
+  const groupIndex = getGroupIndexById(clientId);
   if (clientId === undefined) {
     json["header"]["status"] = 400;
     json["body"] = `${prefix(`server`)} 먼저 checkin을 진행해주세요.\r\n`;
+    log(`complete : no checkin camper (failure)`);
     return;
   }
 
@@ -17,10 +20,10 @@ const complete = (json, clientId) => {
   ) {
     json["header"]["status"] = 400;
     json["body"] = `${prefix(`server`)} 당신은 그룹장이 아닙니다.\r\n`;
+    log(`complete from group#${groupIndex}(${clientId}) (failure)`);
     return;
   }
 
-  const groupIndex = getGroupIndexById(clientId);
   const newjson = { header: {} };
   newjson["header"]["from"] = "server";
   newjson["header"]["status"] = 200;
@@ -35,6 +38,7 @@ const complete = (json, clientId) => {
 
   json["header"]["status"] = 200;
   json["body"] = `${prefix(`server`)} 당신이 피어세션을 종료하였습니다.\r\n`;
+  log(`complete from group#${groupIndex}(${clientId}) (success)`);
   return;
 };
 

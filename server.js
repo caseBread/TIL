@@ -50,7 +50,7 @@ const server = net.createServer(function (socket) {
         checkIn(json, socket);
         break;
       case "mission":
-        mission(json);
+        mission(json, socket.clientId);
         break;
       case "peersession":
         peerSession(json, socket.clientId); // checkin 거치면 socket에 clientId생성됨.

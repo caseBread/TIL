@@ -1,7 +1,7 @@
 const { attendance, group, checkinTime } = require("./serverData");
 let { nowGroupNumber } = require("./serverData");
 const { prefix } = require("./util");
-let newClientId = 1;
+const log = console.log;
 
 /**
  *
@@ -18,12 +18,14 @@ const checkIn = (json, socket) => {
     json["body"] = `${prefix(
       `server`
     )} 잘못된 ID를 입력하였습니다. ID범위 : (J001 ~ J384)\r\n`;
+    log(`checkin ${campId} (failure) from ${socket.address().address}`);
     return;
   }
 
   if (attendance[campId]) {
     json["header"]["status"] = 400;
     json["body"] = `${prefix(`server`)} 이미 출석하였습니다.\r\n`;
+    log(`checkin ${campId} (failure) from ${socket.address().address}`);
     return;
   }
 
@@ -50,6 +52,18 @@ const checkIn = (json, socket) => {
   json["body"] = `${prefix(
     `server`
   )} ${campId} checkin완료 그룹번호:${nowGroupNumber}\r\n`;
+
+  /**
+   * 로그 출력
+   *
+   */
+  const session = group[nowGroupNumber].length;
+  log(
+    `checkin ${campId} (success) from ${
+      socket.address().address
+    } => session#${session}, group#${nowGroupNumber}`
+  );
+
   return;
 };
 
