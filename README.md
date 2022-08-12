@@ -14,7 +14,7 @@
 checkin J111
 
 //J111
-mission day01
+mission day1
 
 //  J222
 checkin J222
@@ -107,6 +107,10 @@ checkout
 - [x] message 요청 text 전송
 
 - [x] direct 요청 campId, text 전송
+
+## 시연 연상
+
+![](https://postfiles.pstatic.net/MjAyMjA4MTJfMjgx/MDAxNjYwMjY1MDc5MTA2.460bQ7bf2zJfv-L9hOOSLLZicLVRjfqao1j0LBGoTYUg.R58d9NoaE5Mj9H-PfZYfyssGW-lBEWist_A_O-IMxaEg.GIF.kgu0515/testing.gif?type=w773)
 
 ## 리팩토링할 점
 

@@ -1,5 +1,6 @@
 const { attendance, group } = require("./serverData");
-const { prefix } = require("./util");
+const { prefix, getGroupIndexById } = require("./util");
+const log = console.log;
 
 const direct = (json, clientId) => {
   const groupIndex = getGroupIndexById(clientId);

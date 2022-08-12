@@ -29,7 +29,7 @@ const checkOut = (json, clientId) => {
   group[groupIndex]
     .filter((x) => x !== clientId)
     .forEach((x, i) => {
-      attendance[x].write(JSON.stringify(newjson));
+      if (x in attendance) attendance[x].write(JSON.stringify(newjson));
     });
 
   log(`${prefix(`clientId`)} is checkout (success). (run time = ${runTime}ms)`);
