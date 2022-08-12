@@ -17,7 +17,7 @@ const checkOut = (json, clientId) => {
   delete attendance[clientId];
   // group의 clientId도 빼야함
 
-  const runTime = new Date() - checkinTime[clientId];
+  const runTime = new Date() - new Date(checkinTime[clientId]);
 
   const groupIndex = getGroupIndexById(clientId);
   const newjson = { header: {} };
