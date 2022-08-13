@@ -11,6 +11,7 @@ const checkOut = (json, clientId) => {
   if (clientId === undefined) {
     json["header"]["status"] = 400;
     json["body"] = `${prefix(`server`)} checkin을 먼저 진행해주세요.\r\n`;
+    log(`checkOut : no checkin camper (failure)`);
     return;
   }
 

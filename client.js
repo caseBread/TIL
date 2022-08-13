@@ -13,35 +13,50 @@ const incoding = (line) => {
   const command = line.split(" ");
   switch (command[0]) {
     case "checkin":
-      result["header"]["command"] = "checkin";
-      result["header"]["campId"] = command[1];
-      result["header"]["date"] = new Date();
+      result.header = {
+        command: "checkin",
+        campId: command[1],
+        date: new Date(),
+      };
       break;
     case "mission":
-      result["header"]["command"] = "mission";
-      result["header"]["day"] = command[1];
-
+      result.header = {
+        command: "mission",
+        day: command[1],
+      };
       break;
     case "peersession":
-      result["header"]["command"] = "peersession";
-      result["header"]["maxCount"] = command[1];
+      result.header = {
+        command: "peersession",
+        maxCount: command[1],
+      };
       break;
     case "complete":
-      result["header"]["command"] = "complete";
+      result.header = {
+        command: "complete",
+      };
       break;
     case "message":
-      result["header"]["command"] = "message";
-      result["header"]["msg"] = {};
-      result["header"]["msg"]["text"] = command.slice(1).join(" ");
+      result.header = {
+        command: "message",
+        msg: {
+          text: command.slice(1).join(" "),
+        },
+      };
       break;
     case "direct":
-      result["header"]["command"] = "direct";
-      result["header"]["msg"] = {};
-      result["header"]["msg"]["to"] = command[1];
-      result["header"]["msg"]["text"] = command.slice(2).join(" ");
+      result.header = {
+        command: "direct",
+        msg: {
+          to: command[1],
+          text: command.slice(1).join(" "),
+        },
+      };
       break;
     case "checkout":
-      result["header"]["command"] = "checkout";
+      result.header = {
+        command: "checkout",
+      };
       break;
     default:
   }
@@ -51,19 +66,6 @@ const incoding = (line) => {
 
 socket.on("connect", function () {
   log("connected to server!");
-
-  /**
-   * 명령을
-   * json형태로 한다.
-   * 클라이언트에서 입력하면
-   * 그것을 json으로 incoding
-   * server에서는 json을 decoding
-   *
-   * json 형태는
-   * "command":"checkin"
-   * "campId":"J021"
-   * ""
-   */
 
   rl.on("line", (line) => {
     const json = incoding(line.toString("utf8"));
@@ -77,7 +79,7 @@ socket.on("connect", function () {
 socket.on("data", function (data) {
   const chunk = data.toString("utf8");
   const json = JSON.parse(chunk);
-  if ("body" in json) process.stdout.write(json["body"]);
+  if (body in json) process.stdout.write(json.body);
   if (json.header.closed) socket.end();
 });
 
