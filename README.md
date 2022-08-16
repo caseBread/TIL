@@ -30,3 +30,20 @@ spread, rest
 filter, map은 object에 안먹힘
 
 => list로 변환
+
+### 클로저
+
+클로저는 쉽게 함수를 값으로써 다루는것을 이용하는것임..
+
+```javascript
+function makeFunc() {
+  var name = "Mozilla";
+  function displayName() {
+    alert(name);
+  }
+  return displayName;
+}
+
+var myFunc = makeFunc(); // makeFunc의 반환함수로 선언됨
+console.log(myFunc()); // 반환함수에 대한 함수인ㄷ 이때 makeFunc가 선언된시절 name인 Mozilla를 기억하게 되는것 이게 클로저!!!!!!!!!!!
+```
