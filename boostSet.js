@@ -5,15 +5,16 @@ class BoostSet {
   }
 
   map(func) {
-    return BoostSet(this.set.map(func));
+    return new BoostSet(this.set.map(func));
   }
 
   filter(func) {
-    return BoostSet(this.set.map(func));
+    return new BoostSet(this.set.filter(func));
   }
 
   display(func, initValue) {
-    return this.set.reduce(func, initValue);
+    const obj = this.set.reduce(func, initValue);
+    log(obj);
   }
 
   copySet() {

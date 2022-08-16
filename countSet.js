@@ -1,6 +1,7 @@
 const log = console.log;
 class CountSet {
   constructor(set = {}) {
+    this.arrayBySet = Object.entries(set);
     this.key = Object.keys(set).map((x) => Number(x));
     this.value = Object.values(set).map((x) => Number(x));
   }
@@ -23,7 +24,10 @@ class CountSet {
     return new CountSet(result);
   }
 
-  display(func, initValue) {}
+  display(func, initValue) {
+    const obj = this.arrayBySet.reduce(func, initValue);
+    log(obj);
+  }
 
   append(element) {
     if (this.key.indexOf(element) !== -1) {
