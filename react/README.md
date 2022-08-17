@@ -33,3 +33,25 @@ const h3 = React.createElement(
   "Hello i am span"
 );
 ```
+
+### 2.4 Recap
+
+- 기껏 createElement 배워왔는데 이거 이제 안쓴대
+
+### 2.5 JSX
+
+- Babel을 통해 JSX를 createElement로 변환한다
+
+- jsx 변환기를 달아주면 jsx로 작성한 내용을 createElement 식으로 인식시킬 수 있다.
+
+- jsx 방식은 다음과 같다.
+
+```javascript
+const Title = (
+  <h3 id="title" onmouseenter={() => console.log("mouseEnter")}>
+    Hello im a title
+  </h3>
+);
+```
+
+- jsx 변환 형식은 다음 사이트에서 확인할 수 있다. [babeljs.io](https://babeljs.io/)
