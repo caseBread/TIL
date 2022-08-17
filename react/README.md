@@ -14,3 +14,22 @@
 - createElement를 이용하면 태그안의 요소를 정의할 수 있다. 텍스트던, 아이디이름이던, css요소던, ...
 
 - 즉, react를 이용하면 html적인 요소를 js 안에서 표현할 수 있게 되는것 같다.
+
+### 2-3 Events in React
+
+- event적인 요소 추가 가능
+
+- createElement 의 파라미터로 2번째에 객체를 넣는데, 여기에 원하는 이벤트 요소를 넣으면 된다.
+
+- 다음은 그 예시다.
+
+```javascript
+const h3 = React.createElement(
+  "h3",
+  {
+    id: "title",
+    onMouseEnter: () => console.log("mouseEnter"),
+  },
+  "Hello i am span"
+);
+```
