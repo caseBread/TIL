@@ -10,3 +10,7 @@
 ![image](https://user-images.githubusercontent.com/92029332/185049104-53a1ff83-6942-4957-8774-fe1f681e010f.png)
 
 - 위의 그림처럼 render를 이용하면 root가 id인 태그 에 span이 생김.
+
+- createElement를 이용하면 태그안의 요소를 정의할 수 있다. 텍스트던, 아이디이름이던, css요소던, ...
+
+- 즉, react를 이용하면 html적인 요소를 js 안에서 표현할 수 있게 되는것 같다.
