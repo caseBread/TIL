@@ -1,0 +1,24 @@
+{
+  "name": "day14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/350a28c7a4cc26cdc0ebae7527d2b35b.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/350a28c7a4cc26cdc0ebae7527d2b35b"
+  },
+  "homepage": "https://gist.github.com/350a28c7a4cc26cdc0ebae7527d2b35b",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "readline-sync": "^1.4.10"
+  }
+}
