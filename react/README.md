@@ -55,3 +55,11 @@ const Title = (
 ```
 
 - jsx 변환 형식은 다음 사이트에서 확인할 수 있다. [babeljs.io](https://babeljs.io/)
+
+### 2.6 JSX part two
+
+- container 안에 넣을 요소의 이름은 무조건 첫글자를 대문자로 선언해야한다. (`Title`, `Button` 처럼)
+
+- 컴포넌트는 함수로 만들어 주어야 한다.
+  - function 사용시 return붙여야함
+  - 화살표함수는 안붙혀도됌.
