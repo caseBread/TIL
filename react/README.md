@@ -95,3 +95,8 @@ const [counter, modifier] = data;
 - html 속성에 value하고 onChange 넣기
 - 그리고 onChange의 modifier에다 받은 event의 원하는 정보 찾아 넣기..
 - event.target.value가 입력한 정보이다..
+
+### 3.6 State Practice part One
+
+- setState에 어떤 값을 파라미터로 넣으면 default값됨.
+- minutes 와 setMinutes 다루기... 시야확장타임
