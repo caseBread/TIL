@@ -99,4 +99,4 @@ const [counter, modifier] = data;
 ### 3.6 State Practice part One
 
 - setState에 어떤 값을 파라미터로 넣으면 default값됨.
-- minutes 와 setMinutes 다루기... 시야확장타임
+- state 와 modifier 다루기... 시야확장타임
