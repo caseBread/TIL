@@ -88,3 +88,10 @@ const [counter, modifier] = data;
 
 - `setCounter(counter + 1);` 요방식 말고 `setCounter((current) => current + 1);` 요방식 써라!!
 - 아마 첫번째 방식을 쓰면 비동기 관련 오류 나는듯
+
+### 3.5 Inputs and State
+
+- html 속성으로 js의 명령어를 쓰지 말것 (ex. class, for)
+- html 속성에 value하고 onChange 넣기
+- 그리고 onChange의 modifier에다 받은 event의 원하는 정보 찾아 넣기..
+- event.target.value가 입력한 정보이다..
