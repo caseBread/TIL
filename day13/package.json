@@ -1,0 +1,22 @@
+{
+  "name": "day13",
+  "version": "1.0.0",
+  "description": "- [x] 응용계층 구현\r - [x] 표현계층 구현\r - [ ] 세션계층 구현\r - [ ] 전송계층 구현\r - [ ] 네트워크계층 구현\r - [ ] 데이터링크계층 구현\r - [ ] 물리계층 구현",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/5ff7888f3bf54e34e9f59f19d6626176.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/5ff7888f3bf54e34e9f59f19d6626176"
+  },
+  "homepage": "https://gist.github.com/5ff7888f3bf54e34e9f59f19d6626176",
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}

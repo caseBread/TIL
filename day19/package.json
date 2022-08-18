@@ -1,0 +1,23 @@
+{
+  "name": "day19",
+  "version": "1.0.0",
+  "description": "![](https://postfiles.pstatic.net/MjAyMjA4MTFfMjAg/MDAxNjYwMjAwNDc3MDUz.7Ju3g1AtjORkbgKrWAh1o_mtCz5fqTYGHWFXaIla1Tog.cBWcxIEnLc3gkucEVp5geZVmZAp1wFVw5NuQdXQuG7Yg.GIF.kgu0515/ezgif-4-b23322af0d.gif?type=w773)",
+  "main": "checkin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/6b16db83313b9978f32935e441dba853.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/6b16db83313b9978f32935e441dba853"
+  },
+  "homepage": "https://gist.github.com/6b16db83313b9978f32935e441dba853",
+  "dependencies": {
+    "chalk": "^5.0.1"
+  }
+}

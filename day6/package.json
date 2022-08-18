@@ -1,0 +1,25 @@
+{
+  "name": "day3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/c92a1bd6d38c53f30d574a29486d0809.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/c92a1bd6d38c53f30d574a29486d0809"
+  },
+  "homepage": "https://gist.github.com/c92a1bd6d38c53f30d574a29486d0809",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "lru-cache": "^7.13.1"
+  }
+}

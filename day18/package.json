@@ -1,0 +1,22 @@
+{
+  "name": "day18",
+  "version": "1.0.0",
+  "description": "- [x] CREATE TABLE 구현 및 출력",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gist.github.com/aaf5538b42cb8499363128486c1eedc6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/aaf5538b42cb8499363128486c1eedc6"
+  },
+  "homepage": "https://gist.github.com/aaf5538b42cb8499363128486c1eedc6",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
