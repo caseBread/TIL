@@ -74,12 +74,17 @@ const data = React.useState(666);
 const [counter, modifier] = data;
 ```
 
-### 3.1 setState part Two
+### 3.2 setState part Two
 
 - counter와 modifier를 함수로 묶어 동작하게끔 설정.
 - 그 함수는 onClick의 인자로 넣어
 
-### 3.2 Recap
+### 3.3 Recap
 
 - state (counter부분)이 modifier(setCounter부분) 을 통해 값이 바뀌면 렌더링이 일어난다!!
 - App 부분 안에서 state 가 쓰이는 모든 부분이 refresh 됌!
+
+### 3.4 State Function
+
+- `setCounter(counter + 1);` 요방식 말고 `setCounter((current) => current + 1);` 요방식 써라!!
+- 아마 첫번째 방식을 쓰면 비동기 관련 오류 나는듯
