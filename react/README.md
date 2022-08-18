@@ -10,17 +10,13 @@
 ![image](https://user-images.githubusercontent.com/92029332/185049104-53a1ff83-6942-4957-8774-fe1f681e010f.png)
 
 - 위의 그림처럼 render를 이용하면 root가 id인 태그 에 span이 생김.
-
 - createElement를 이용하면 태그안의 요소를 정의할 수 있다. 텍스트던, 아이디이름이던, css요소던, ...
-
 - 즉, react를 이용하면 html적인 요소를 js 안에서 표현할 수 있게 되는것 같다.
 
 ### 2-3 Events in React
 
 - event적인 요소 추가 가능
-
 - createElement 의 파라미터로 2번째에 객체를 넣는데, 여기에 원하는 이벤트 요소를 넣으면 된다.
-
 - 다음은 그 예시다.
 
 ```javascript
@@ -41,9 +37,7 @@ const h3 = React.createElement(
 ### 2.5 JSX
 
 - Babel을 통해 JSX를 createElement로 변환한다
-
 - jsx 변환기를 달아주면 jsx로 작성한 내용을 createElement 식으로 인식시킬 수 있다.
-
 - jsx 방식은 다음과 같다.
 
 ```javascript
@@ -59,7 +53,28 @@ const Title = (
 ### 2.6 JSX part two
 
 - container 안에 넣을 요소의 이름은 무조건 첫글자를 대문자로 선언해야한다. (`Title`, `Button` 처럼)
-
 - 컴포넌트는 함수로 만들어 주어야 한다.
   - function 사용시 return붙여야함
   - 화살표함수는 안붙혀도됌.
+
+### 3.0 Understanding State
+
+- 한번 렌더링 후 리렌더링 해주어야 화면에 count가 업데이트 됨. 렌더링 필수!
+- 렌더링 필요할때마다 렌더링 전체를 해주면 비효율적임
+- 다음시간엔 효율적인 렌더링 방법에 대해 알아볼것임!
+
+### 3.1 setState part One
+
+- setState : 호율적인 렌더링을 위한 메쏘드
+- setState의 리턴값은 값과 값modefier 두개다.
+- 아래 방식으로 리턴값에 이름지어주기가 가능하다.
+
+```javascript
+const data = React.useState(666);
+const [counter, modifier] = data;
+```
+
+### 3.1 setState part Two
+
+- counter와 modifier를 함수로 묶어 동작하게끔 설정.
+- 그 함수는 onClick의 인자로 넣어
