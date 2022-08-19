@@ -110,3 +110,9 @@ const [counter, modifier] = data;
 
 - text에다가도 state를 활용할 수 있다.
 - state의 다양한 범용성
+
+### 3.9 Final Practice and Recap
+
+- 이제 지금까지 만든 시간변환기를 함수로 묶으면 html 태그처럼 사용이 가능하다.
+- App이라는 함수에 지금까지 만든 묶음을 사용해주면 된다.
+- 물론 App이라는 함수에도 setState를 만들어 적절히 배치해주면 된다.
