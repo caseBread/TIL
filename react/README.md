@@ -105,3 +105,8 @@ const [counter, modifier] = data;
 
 - disabled 속성 : 입력창 비활성화 여부
 - State 두개이상 다뤄보기 시간이었음
+
+### 3.8 Recap
+
+- text에다가도 state를 활용할 수 있다.
+- state의 다양한 범용성

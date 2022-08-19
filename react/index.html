@@ -10,12 +10,12 @@
     const root = document.getElementById("root");
 
     function App() {
-      const [amounts, setamounts] = React.useState(0); // 안에 뭐 넣으면 default값됨
+      const [amounts, setAmounts] = React.useState(0); // 안에 뭐 넣으면 default값됨
       const [flipped, setFlipped] = React.useState(false);
       const onChange = (event) => {
-        setamounts(event.target.value);
+        setAmounts(event.target.value);
       };
-      const reset = () => setamounts(0);
+      const reset = () => setAmounts(0);
       const onFlip = () => {
         reset();
         setFlipped((current) => !current);
@@ -43,7 +43,9 @@
             disabled={!flipped}
           />
           <button onClick={reset}>reset</button>
-          <button onClick={onFlip}>flip</button>
+          <button onClick={onFlip}>
+            {flipped ? "hours->minutes" : "minutes->hours"}
+          </button>
         </div>
       );
     }
