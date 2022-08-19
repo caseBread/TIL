@@ -100,3 +100,8 @@ const [counter, modifier] = data;
 
 - setState에 어떤 값을 파라미터로 넣으면 default값됨.
 - state 와 modifier 다루기... 시야확장타임
+
+### 3.7 State Practice part Two
+
+- disabled 속성 : 입력창 비활성화 여부
+- State 두개이상 다뤄보기 시간이었음
