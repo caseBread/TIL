@@ -123,3 +123,10 @@ const [counter, modifier] = data;
 - label에 꼭 속성 붙혀야 하는가
 - placeholder ?? htmlFor ?? 모르는 속성이 너무 많다!
 - event.target.value 는 자주쓸거같으니까 외우자
+
+### 4.0 Props
+
+- component의 재사용 방법을 알아봄. 약간 OOP 느낌
+- component(`<Btn />`) 안에 파라미터를 넣으면 function에서 받을 수 있다.
+- 파라미터 값을 통해 text나 속성 구성 가능
+- 파라미터 이름은 자유인듯 ?? text쓰던 foo 쓰던 banana 쓰던 big 쓰던 ...

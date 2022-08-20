@@ -7,113 +7,29 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function MinutesToHours() {
-      const [amounts, setAmounts] = React.useState(0); // 안에 뭐 넣으면 default값됨
-      const [flipped, setFlipped] = React.useState(false);
-      const onChange = (event) => {
-        setAmounts(event.target.value);
-      };
-      const reset = () => setAmounts(0);
-      const onFlip = () => {
-        reset();
-        setFlipped((current) => !current);
-      };
-      return (
-        <div>
-          <label htmlFor="amounts">minutes </label>
-          <input
-            value={flipped ? amounts * 60 : amounts}
-            id="amounts"
-            placeholder="amounts"
-            type="number"
-            onChange={onChange}
-            disabled={flipped}
-          />
-          <h4>you want to convert {amounts}</h4>
-          <label htmlFor="hours">Hours </label>
-          <input
-            value={flipped ? amounts : Math.round(amounts / 60)}
-            id="hours"
-            placeholder="hours"
-            type="number"
-            onChange={onChange}
-            disabled={!flipped}
-          />
-          <button onClick={reset}>reset</button>
-          <button onClick={onFlip}>
-            {flipped ? "hours->minutes" : "minutes->hours"}
-          </button>
-        </div>
-      );
-    }
-    function KmToMiles() {
-      const [distance, setDistance] = React.useState(0);
-      const [kmOrMiles, setKmOrMiles] = React.useState(false);
-      const onChange = (event) => {
-        setDistance(event.target.value);
-      };
-      const onFliped = () => {
-        reset();
-        setKmOrMiles((current) => !current);
-      };
-      const reset = () => {
-        setDistance(0);
-      };
-      return (
-        <div>
-          <h3>KM to Miles</h3>
-          <label id="km">Km </label>
-          <input
-            id="km"
-            type="number"
-            onChange={onChange}
-            value={
-              kmOrMiles === false
-                ? distance
-                : Math.round((distance * 0.6214 + Number.EPSILON) * 100) / 100
-            }
-            disabled={kmOrMiles}
-          ></input>
-          <hr />
-          <label id="miles">Miles </label>
-          <input
-            id="miles"
-            type="number"
-            onChange={onChange}
-            value={
-              kmOrMiles === true
-                ? distance
-                : Math.round((distance / 0.6214 + Number.EPSILON) * 100) / 100
-            }
-            disabled={!kmOrMiles}
-          ></input>
-          <hr />
-          <button id="flip" onClick={onFliped}>
-            {kmOrMiles ? "miles -> km" : "km -> miles"}
-          </button>
-          <button id="reset" onClick={reset}>
-            reset
-          </button>
-        </div>
-      );
-    }
     function App() {
-      const [index, setIndex] = React.useState("~~");
-      const onSelect = (event) => {
-        setIndex(event.target.value);
-      };
+      //props받는대신 props의 속성을 바로 받을수 있다. => {foo}
+      function Btn({ text, big }) {
+        // root에서 보낸 파라미터 유일함.
+        return (
+          <button
+            style={{
+              backgroundColor: "tomato",
+              color: "white",
+              padding: "10px 20px",
+              border: 0,
+              borderRadius: 10,
+              fontSize: big ? 18 : 16,
+            }}
+          >
+            {text}
+          </button>
+        );
+      }
       return (
         <div>
-          <h1>Super Converter</h1>
-          <select value={index} onChange={onSelect}>
-            <option value="~~">select your units</option>
-            <option value="0">Minutes & Hours</option>
-            <option value="1">Km & Miles</option>
-          </select>
-          <hr />
-          {index === "~~" ? "Please select your units" : null}
-          {index === "0" ? <MinutesToHours /> : null}
-          {index === "1" ? <KmToMiles /> : null}
+          <Btn text="Save Changes" big={true} />
+          <Btn text="Comfirm" big={false} />
         </div>
       );
     }
