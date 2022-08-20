@@ -20,7 +20,7 @@
       };
       return (
         <div>
-          <label htmlFor="amounts">minutes</label>
+          <label htmlFor="amounts">minutes </label>
           <input
             value={flipped ? amounts * 60 : amounts}
             id="amounts"
@@ -30,7 +30,7 @@
             disabled={flipped}
           />
           <h4>you want to convert {amounts}</h4>
-          <label htmlFor="hours">Hours</label>
+          <label htmlFor="hours">Hours </label>
           <input
             value={flipped ? amounts : Math.round(amounts / 60)}
             id="hours"
@@ -47,7 +47,55 @@
       );
     }
     function KmToMiles() {
-      return <h3>KM to Miles</h3>;
+      const [distance, setDistance] = React.useState(0);
+      const [kmOrMiles, setKmOrMiles] = React.useState(false);
+      const onChange = (event) => {
+        setDistance(event.target.value);
+      };
+      const onFliped = () => {
+        reset();
+        setKmOrMiles((current) => !current);
+      };
+      const reset = () => {
+        setDistance(0);
+      };
+      return (
+        <div>
+          <h3>KM to Miles</h3>
+          <label id="km">Km </label>
+          <input
+            id="km"
+            type="number"
+            onChange={onChange}
+            value={
+              kmOrMiles === false
+                ? distance
+                : Math.round((distance * 0.6214 + Number.EPSILON) * 100) / 100
+            }
+            disabled={kmOrMiles}
+          ></input>
+          <hr />
+          <label id="miles">Miles </label>
+          <input
+            id="miles"
+            type="number"
+            onChange={onChange}
+            value={
+              kmOrMiles === true
+                ? distance
+                : Math.round((distance / 0.6214 + Number.EPSILON) * 100) / 100
+            }
+            disabled={!kmOrMiles}
+          ></input>
+          <hr />
+          <button id="flip" onClick={onFliped}>
+            {kmOrMiles ? "miles -> km" : "km -> miles"}
+          </button>
+          <button id="reset" onClick={reset}>
+            reset
+          </button>
+        </div>
+      );
     }
     function App() {
       const [index, setIndex] = React.useState("~~");

@@ -116,3 +116,10 @@ const [counter, modifier] = data;
 - 이제 지금까지 만든 시간변환기를 함수로 묶으면 html 태그처럼 사용이 가능하다.
 - App이라는 함수에 지금까지 만든 묶음을 사용해주면 된다.
 - 물론 App이라는 함수에도 setState를 만들어 적절히 배치해주면 된다.
+
+### 챌린지 과제 (km to miles 코드 짜기)
+
+- 왜 div를 써야하는가
+- label에 꼭 속성 붙혀야 하는가
+- placeholder ?? htmlFor ?? 모르는 속성이 너무 많다!
+- event.target.value 는 자주쓸거같으니까 외우자
