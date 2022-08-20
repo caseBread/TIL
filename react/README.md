@@ -130,3 +130,13 @@ const [counter, modifier] = data;
 - component(`<Btn />`) 안에 파라미터를 넣으면 function에서 받을 수 있다.
 - 파라미터 값을 통해 text나 속성 구성 가능
 - 파라미터 이름은 자유인듯 ?? text쓰던 foo 쓰던 banana 쓰던 big 쓰던 ...
+
+### 4.1 Memo
+
+- 선언한 component 에는 원래 html 속성을 쓸 수 없다.
+  - ex) `<Btn />` 안에 속성으로 `onClick` 따위 쓸수 없다.
+  - `Btn`을 선언한 함수 내에서 사용해야함.
+- `React.memo()`
+  - 리액트는 컴포넌트의 상태가 변경되면 모든 컴포넌트를 rendering하게됨
+  - 이 과정에서 변경할 필요가 없는 컴포넌트도 rendering하게됨 (성능저하 원인)
+  - 변경하지 않도록 해주는 것이 React.memo()
