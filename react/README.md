@@ -187,3 +187,12 @@ MyComponent.propTypes = {
   infos: PropTypes.objectOf(PropTypes.number)
 }
 ```
+
+### 4.3 Recap
+
+- 컴포넌트에 필요한 속성넣기...
+
+### 5.0 intruduction
+
+- `npx create-react-app [appname]` 시 react app 생성됨.
+- `npm run start` 하면 react 서버 생성됨.

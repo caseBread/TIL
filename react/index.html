@@ -29,11 +29,12 @@
     }
     //const MemorizedBtn = React.memo(Btn);
 
-    // propTypes를 따져줌으로써 파라미터에 값 잘못넣는 실수 방지
+    // PropTypes를 따져줌으로써 파라미터에 값 잘못넣는 실수 방지
     Btn.PropTypes = {
       text: PropTypes.string,
       fontSize: PropTypes.number,
     };
+
     function App() {
       //props받는대신 props의 속성을 바로 받을수 있다. => {foo}
       const [value, setValue] = React.useState("Save Changes");
