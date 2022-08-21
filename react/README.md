@@ -140,3 +140,50 @@ const [counter, modifier] = data;
   - 리액트는 컴포넌트의 상태가 변경되면 모든 컴포넌트를 rendering하게됨
   - 이 과정에서 변경할 필요가 없는 컴포넌트도 rendering하게됨 (성능저하 원인)
   - 변경하지 않도록 해주는 것이 React.memo()
+
+### 4.2 Prop Types
+
+- 함수 파라미터로 보낼 대 type을 따지게 해줌
+
+  - 파라미터 잘못보내는 실수 방지
+  - typeScript를 사용할 경우 prop types를 굳이 안따져도 됌.
+  - 정확한 메쏘드명은 `(prop이름).PropTypes = {}` 이다.
+
+- PropTypes가 확인할 수 있는 다양한 요소들
+
+```javascript
+MyComponent.propTypes = {
+  // 리액트 요소
+  // <div>123</div> , <Component />
+  menu: PropTypes.element,
+
+  // 컴포넌트 함수가 반환할 수 있는 모든 것(비추)
+  // <SomeComponent />, 123
+  description: PropTypes.node,
+
+  // Message 클래스로 생성된 모든 객체
+  // new Messages() -> 참, new Car() -> 거짓
+  message: PropTypes.instanceOf(Message),
+
+  // 배열에 포함된 값 중에서 하나를 만족
+  name: PropTypes.oneOf(["jake", "olivia"]),
+
+  // 배열에 포함된 타입 중에서 하나를 만족
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+
+  // 특정 타입만 포함하는 배열
+  // [1, 5, 7] -> 참, ['a', 'b'] -> 거짓
+  ages: PropTypes.arrayOf(PropTypes.number),
+
+  // 객체의 속성값 타입을 정의
+  // {color: 'red', weight: 123} -> 참
+  info: PropTypes.shape({
+    color: PropTypes.string,
+    weight: PropTypes.number
+  })
+
+  // 객체에서 모든 속성값의 타입이 같은 경우
+  // {prop1: 123, prop2: 456}
+  infos: PropTypes.objectOf(PropTypes.number)
+}
+```
