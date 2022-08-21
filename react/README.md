@@ -196,3 +196,14 @@ MyComponent.propTypes = {
 
 - `npx create-react-app [appname]` 시 react app 생성됨.
 - `npm run start` 하면 react 서버 생성됨.
+
+### 5.1 Tour of CRA
+
+- App.js 있는 폴더에 js폴더 만들어서 기능 구현 + export 후 App.js에 import 해주면 됌.
+- propTypes 검사할 때 `.isRequired` 붙히면 그 요소가 필수적으로 있어야 된다는 뜻.
+
+- 이번 강의에서 Button.js와 style.css 파일 작성 후 적용방법 알아봄.
+- 아래 그림처럼 className 적으면 랜덤한 이름을 생성한다 ??
+  ![image](https://user-images.githubusercontent.com/92029332/185778481-565c22db-475e-4a48-9624-1992ef3c52ba.png)
+  - 따라서, className이 겹쳐도 상관없다.
+  - 컴포넌트들이 독립적으로 존재할 수 있게 됌.
