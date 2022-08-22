@@ -206,4 +206,10 @@ MyComponent.propTypes = {
 - 아래 그림처럼 className 적으면 랜덤한 이름을 생성한다 ??
   ![image](https://user-images.githubusercontent.com/92029332/185778481-565c22db-475e-4a48-9624-1992ef3c52ba.png)
   - 따라서, className이 겹쳐도 상관없다.
-  - 컴포넌트들이 독립적으로 존재할 수 있게 됌.
+  - 랜덤한 className을 생성하기 때문에 컴포넌트들이 독립적으로 존재할 수 있게 됌.
+
+### 6.0 ~ 6.1
+
+- `useEffect`에 대해 배움
+- `useEffect`란, 프로그램 실행 시 불필요하게 여러번 실행되는 것을 방지하기 위해 한번만 실행하게 끔 해주는 함수
+- 파라미터로 function, [] 를 넣는다.
