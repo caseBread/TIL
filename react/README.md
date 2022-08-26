@@ -223,3 +223,27 @@ MyComponent.propTypes = {
   - 변화대상을 지정해주지 않으면 최초1번만 실행.
 
 - `useEffect` 안에 if문을 넣어도 된다.
+
+### 6.4 Cleanup
+
+- Cleanup function이란, component가 destroy될때 실행되는 함수.
+- useEffect의 return값으로 cleanup function을 입력하면 된다.
+- 코드를 아래 코드처럼 나눠주어도 된다.
+
+```javascript
+function Hello() {
+  function destroyedFn() {
+    console.log("bye :(");
+  }
+  function createdFn() {
+    console.log("created :)");
+    return destroyedFn;
+  }
+  useEffect(createdFn, []);
+  return <h1>Hello</h1>;
+}
+```
+
+- 다만, cleanup이 자주 쓰이진 않음.
+
+- **이론 끝!**
